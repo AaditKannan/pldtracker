@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <filter id="phaseNoise">
+      <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="4" seed="31" result="noise"/>
+      <feColorMatrix type="saturate" values="0" in="noise" result="grayNoise"/>
+      <feComponentTransfer in="grayNoise" result="mappedNoise">
+        <feFuncR type="table" tableValues="0.15 0.30 0.50 0.40 0.70"/>
+        <feFuncG type="table" tableValues="0.10 0.12 0.18 0.15 0.20"/>
+        <feFuncB type="table" tableValues="0.65 0.45 0.25 0.35 0.15"/>
+      </feComponentTransfer>
+    </filter>
+  </defs>
+  <!-- Background -->
+  <rect width="256" height="256" fill="#1a1d27"/>
+  <!-- Phase noise base layer -->
+  <rect width="256" height="256" filter="url(#phaseNoise)" opacity="0.8"/>
+  <!-- Angled stripe domain pattern - alternating red/blue bands -->
+  <!-- Red-toned stripes (positive phase) -->
+  <rect x="-40" y="0" width="45" height="300" fill="#b83030" opacity="0.4" transform="rotate(-25 128 128)"/>
+  <rect x="50" y="0" width="40" height="300" fill="#c83838" opacity="0.35" transform="rotate(-25 128 128)"/>
+  <rect x="145" y="0" width="48" height="300" fill="#a82828" opacity="0.38" transform="rotate(-25 128 128)"/>
+  <rect x="240" y="0" width="42" height="300" fill="#c04040" opacity="0.35" transform="rotate(-25 128 128)"/>
+  <!-- Blue-toned stripes (negative phase) -->
+  <rect x="5" y="0" width="48" height="300" fill="#2848a8" opacity="0.4" transform="rotate(-25 128 128)"/>
+  <rect x="92" y="0" width="52" height="300" fill="#3058b8" opacity="0.38" transform="rotate(-25 128 128)"/>
+  <rect x="190" y="0" width="50" height="300" fill="#2040a0" opacity="0.4" transform="rotate(-25 128 128)"/>
+  <rect x="290" y="0" width="45" height="300" fill="#3860c0" opacity="0.35" transform="rotate(-25 128 128)"/>
+  <!-- Domain wall irregularities - wavy boundaries -->
+  <path d="M0,0 Q15,30 5,60 Q-5,90 8,120 Q18,150 2,180 Q-8,210 10,240 Q20,260 5,280" stroke="#1a1d27" stroke-width="3" fill="none" opacity="0.5" transform="rotate(-25 128 128) translate(47,0)"/>
+  <path d="M0,0 Q-10,35 5,65 Q15,95 -5,125 Q-12,155 8,185 Q18,215 0,245 Q-10,270 5,300" stroke="#1a1d27" stroke-width="2.5" fill="none" opacity="0.45" transform="rotate(-25 128 128) translate(140,0)"/>
+  <path d="M0,0 Q12,28 -2,58 Q-14,88 6,118 Q16,148 -4,178 Q-10,208 8,238 Q15,265 0,290" stroke="#1a1d27" stroke-width="2.8" fill="none" opacity="0.48" transform="rotate(-25 128 128) translate(235,0)"/>
+  <!-- Scattered domain fragments for realism -->
+  <ellipse cx="60" cy="45" rx="8" ry="12" fill="#b83030" opacity="0.3" transform="rotate(15 60 45)"/>
+  <ellipse cx="195" cy="80" rx="10" ry="8" fill="#2848a8" opacity="0.32" transform="rotate(-20 195 80)"/>
+  <ellipse cx="120" cy="190" rx="9" ry="14" fill="#c83838" opacity="0.28" transform="rotate(30 120 190)"/>
+  <ellipse cx="40" cy="180" rx="12" ry="9" fill="#3058b8" opacity="0.3" transform="rotate(-10 40 180)"/>
+  <ellipse cx="210" cy="210" rx="8" ry="11" fill="#a82828" opacity="0.3" transform="rotate(22 210 210)"/>
+  <ellipse cx="85" cy="110" rx="11" ry="7" fill="#2040a0" opacity="0.28" transform="rotate(-35 85 110)"/>
+  <ellipse cx="170" cy="150" rx="7" ry="10" fill="#c04040" opacity="0.3" transform="rotate(18 170 150)"/>
+  <ellipse cx="240" cy="140" rx="10" ry="8" fill="#3860c0" opacity="0.28" transform="rotate(-5 240 140)"/>
+  <!-- Small noisy spots -->
+  <circle cx="30" cy="100" r="4" fill="#c05050" opacity="0.35"/>
+  <circle cx="150" cy="60" r="5" fill="#3050b0" opacity="0.32"/>
+  <circle cx="220" cy="45" r="3.5" fill="#b84040" opacity="0.38"/>
+  <circle cx="100" cy="230" r="4.5" fill="#2848a8" opacity="0.35"/>
+  <circle cx="180" cy="240" r="3" fill="#d04848" opacity="0.3"/>
+  <circle cx="55" cy="240" r="4" fill="#3868c8" opacity="0.32"/>
+  <circle cx="240" cy="20" r="3.5" fill="#a83030" opacity="0.35"/>
+  <circle cx="15" cy="30" r="4" fill="#2850b0" opacity="0.3"/>
+  <!-- Title -->
+  <text x="8" y="16" fill="white" font-family="Arial, sans-serif" font-size="11" font-weight="bold" opacity="0.9">PFM Phase</text>
+  <!-- Scale bar -->
+  <rect x="178" y="238" width="56" height="3" fill="white" opacity="0.9"/>
+  <text x="185" y="234" fill="white" font-family="Arial, sans-serif" font-size="10" opacity="0.9">10 μm</text>
+</svg>

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <filter id="grain10">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="5" seed="77" result="noise"/>
+      <feColorMatrix type="saturate" values="0" in="noise" result="grayNoise"/>
+      <feComponentTransfer in="grayNoise" result="mappedNoise">
+        <feFuncR type="table" tableValues="0.20 0.33 0.50 0.68 0.85"/>
+        <feFuncG type="table" tableValues="0.10 0.25 0.40 0.50 0.58"/>
+        <feFuncB type="table" tableValues="0.05 0.09 0.12 0.16 0.20"/>
+      </feComponentTransfer>
+    </filter>
+  </defs>
+  <!-- Background -->
+  <rect width="256" height="256" fill="#1a1d27"/>
+  <!-- Coarser grain texture -->
+  <rect width="256" height="256" filter="url(#grain10)" opacity="0.95"/>
+  <!-- Larger grain-like features for 10um scan -->
+  <circle cx="40" cy="50" r="18" fill="#8b6914" opacity="0.35"/>
+  <circle cx="110" cy="35" r="22" fill="#a07828" opacity="0.3"/>
+  <circle cx="75" cy="100" r="16" fill="#c8a030" opacity="0.35"/>
+  <circle cx="190" cy="60" r="20" fill="#6b4e12" opacity="0.3"/>
+  <circle cx="230" cy="110" r="24" fill="#b89428" opacity="0.25"/>
+  <circle cx="30" cy="160" r="19" fill="#d4b038" opacity="0.3"/>
+  <circle cx="140" cy="130" r="17" fill="#7a5c1a" opacity="0.35"/>
+  <circle cx="85" cy="180" r="25" fill="#c09820" opacity="0.25"/>
+  <circle cx="210" cy="170" r="15" fill="#a88020" opacity="0.35"/>
+  <circle cx="50" cy="220" r="20" fill="#b08818" opacity="0.3"/>
+  <circle cx="130" cy="200" r="22" fill="#8a6a18" opacity="0.3"/>
+  <circle cx="180" cy="220" r="16" fill="#d0a830" opacity="0.3"/>
+  <circle cx="240" cy="200" r="18" fill="#6a4c10" opacity="0.3"/>
+  <circle cx="160" cy="80" r="21" fill="#9a7820" opacity="0.25"/>
+  <circle cx="20" cy="90" r="15" fill="#b49028" opacity="0.35"/>
+  <circle cx="100" cy="240" r="17" fill="#c4a028" opacity="0.3"/>
+  <circle cx="200" cy="30" r="14" fill="#a48828" opacity="0.35"/>
+  <circle cx="60" cy="140" r="20" fill="#7e6018" opacity="0.3"/>
+  <circle cx="170" cy="150" r="23" fill="#b89828" opacity="0.25"/>
+  <!-- Coarser rectangular features -->
+  <rect x="45" y="65" width="12" height="10" rx="4" fill="#c8a430" opacity="0.35" transform="rotate(22 51 70)"/>
+  <rect x="155" y="105" width="14" height="11" rx="4" fill="#8a6818" opacity="0.3" transform="rotate(-15 162 110)"/>
+  <rect x="210" y="185" width="10" height="13" rx="4" fill="#b49428" opacity="0.35" transform="rotate(40 215 191)"/>
+  <rect x="25" y="200" width="15" height="10" rx="4" fill="#a08020" opacity="0.3" transform="rotate(-8 32 205)"/>
+  <rect x="120" y="65" width="11" height="14" rx="4" fill="#d0a830" opacity="0.25" transform="rotate(50 125 72)"/>
+  <rect x="80" y="30" width="13" height="9" rx="4" fill="#7a5c18" opacity="0.35" transform="rotate(12 86 34)"/>
+  <!-- Title -->
+  <text x="8" y="16" fill="white" font-family="Arial, sans-serif" font-size="11" font-weight="bold" opacity="0.9">AFM Topography</text>
+  <!-- Scale bar -->
+  <rect x="178" y="238" width="56" height="3" fill="white" opacity="0.9"/>
+  <text x="185" y="234" fill="white" font-family="Arial, sans-serif" font-size="10" opacity="0.9">10 μm</text>
+</svg>

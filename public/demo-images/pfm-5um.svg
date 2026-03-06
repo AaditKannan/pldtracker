@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <filter id="pfmNoise">
+      <feTurbulence type="fractalNoise" baseFrequency="0.06" numOctaves="4" seed="53" result="noise"/>
+      <feColorMatrix type="saturate" values="0" in="noise" result="grayNoise"/>
+      <feComponentTransfer in="grayNoise" result="mappedNoise">
+        <feFuncR type="table" tableValues="0.25 0.30 0.35 0.20 0.15"/>
+        <feFuncG type="table" tableValues="0.08 0.20 0.40 0.55 0.70"/>
+        <feFuncB type="table" tableValues="0.35 0.30 0.25 0.18 0.12"/>
+      </feComponentTransfer>
+    </filter>
+  </defs>
+  <!-- Background -->
+  <rect width="256" height="256" fill="#1a1d27"/>
+  <!-- PFM noise base -->
+  <rect width="256" height="256" filter="url(#pfmNoise)" opacity="0.85"/>
+  <!-- Irregular domain patches - purple regions -->
+  <ellipse cx="45" cy="55" rx="25" ry="18" fill="#6a2c8a" opacity="0.45" transform="rotate(-12 45 55)"/>
+  <ellipse cx="180" cy="40" rx="30" ry="22" fill="#7a3498" opacity="0.4" transform="rotate(20 180 40)"/>
+  <ellipse cx="90" cy="130" rx="22" ry="28" fill="#5c2480" opacity="0.42" transform="rotate(-8 90 130)"/>
+  <ellipse cx="220" cy="160" rx="28" ry="20" fill="#6e2e8c" opacity="0.38" transform="rotate(35 220 160)"/>
+  <ellipse cx="50" cy="210" rx="24" ry="18" fill="#7c3696" opacity="0.4" transform="rotate(-25 50 210)"/>
+  <ellipse cx="160" cy="220" rx="20" ry="25" fill="#5a2278" opacity="0.44" transform="rotate(15 160 220)"/>
+  <ellipse cx="130" cy="80" rx="18" ry="15" fill="#8040a0" opacity="0.35" transform="rotate(8 130 80)"/>
+  <!-- Green domain regions -->
+  <ellipse cx="110" cy="45" rx="20" ry="24" fill="#2a8a3c" opacity="0.4" transform="rotate(18 110 45)"/>
+  <ellipse cx="230" cy="80" rx="22" ry="18" fill="#348a44" opacity="0.42" transform="rotate(-30 230 80)"/>
+  <ellipse cx="30" cy="130" rx="26" ry="20" fill="#28803a" opacity="0.38" transform="rotate(5 30 130)"/>
+  <ellipse cx="170" cy="120" rx="18" ry="22" fill="#3c9a4e" opacity="0.4" transform="rotate(-15 170 120)"/>
+  <ellipse cx="80" cy="195" rx="24" ry="16" fill="#2e8840" opacity="0.42" transform="rotate(28 80 195)"/>
+  <ellipse cx="200" cy="230" rx="20" ry="22" fill="#348e48" opacity="0.38" transform="rotate(-10 200 230)"/>
+  <ellipse cx="240" cy="30" rx="16" ry="20" fill="#409050" opacity="0.36" transform="rotate(42 240 30)"/>
+  <!-- Mixed/boundary regions with intermediate colors -->
+  <circle cx="75" cy="80" r="12" fill="#4a6a5a" opacity="0.3"/>
+  <circle cx="150" cy="160" r="15" fill="#5a5878" opacity="0.28"/>
+  <circle cx="200" cy="100" r="10" fill="#486858" opacity="0.32"/>
+  <circle cx="120" cy="180" r="13" fill="#585a72" opacity="0.3"/>
+  <circle cx="40" cy="170" r="11" fill="#4c6c5c" opacity="0.28"/>
+  <circle cx="210" cy="200" r="14" fill="#565870" opacity="0.3"/>
+  <!-- Smaller domain fragments -->
+  <polygon points="95,20 108,28 105,42 90,38 88,25" fill="#6a2c8a" opacity="0.35"/>
+  <polygon points="200,140 218,135 225,150 215,162 198,155" fill="#2e8840" opacity="0.38"/>
+  <polygon points="55,160 70,155 78,168 68,178 52,172" fill="#7a3498" opacity="0.32"/>
+  <polygon points="140,200 158,195 162,210 150,218 138,212" fill="#3c9a4e" opacity="0.35"/>
+  <polygon points="15" cy="240" r="8" fill="#5c2480" opacity="0.3"/>
+  <circle cx="245" cy="240" r="9" fill="#348a44" opacity="0.32"/>
+  <circle cx="128" cy="128" r="16" fill="#4a5868" opacity="0.22"/>
+  <!-- Title -->
+  <text x="8" y="16" fill="white" font-family="Arial, sans-serif" font-size="11" font-weight="bold" opacity="0.9">PFM Amplitude</text>
+  <!-- Scale bar -->
+  <rect x="185" y="238" width="50" height="3" fill="white" opacity="0.9"/>
+  <text x="195" y="234" fill="white" font-family="Arial, sans-serif" font-size="10" opacity="0.9">5 μm</text>
+</svg>

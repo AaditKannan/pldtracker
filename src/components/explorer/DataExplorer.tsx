@@ -1,0 +1,255 @@
+"use client";
+
+import { useState, useMemo } from "react";
+import {
+  ExplorerDataPoint,
+  AXIS_OPTIONS,
+  COLOR_BY_OPTIONS,
+} from "@/lib/utils/explorer-data";
+import { MATERIAL_COLORS, QUALITY_COLORS } from "@/lib/utils/colors";
+import { ScatterPlot } from "./charts/ScatterPlot";
+import { Histogram } from "./charts/Histogram";
+
+type PlotType = "scatter" | "histogram";
+
+const RESEARCHER_COLORS: Record<string, string> = {
+  "Alice Chen": "#8b5cf6",
+  "Bob Martinez": "#3b82f6",
+  "Priya Sharma": "#f59e0b",
+  "Aadit": "#22c55e",
+};
+
+const controlClass =
+  "w-full px-2 py-1.5 border border-[var(--border-subtle)] rounded text-sm bg-[var(--bg-elevated)] text-[var(--text-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--accent-primary)]";
+
+export function DataExplorer({ data }: { data: ExplorerDataPoint[] }) {
+  const [plotType, setPlotType] = useState<PlotType>("scatter");
+  const [xAxis, setXAxis] = useState("substrate_temperature");
+  const [yAxis, setYAxis] = useState("fwhm");
+  const [colorBy, setColorBy] = useState("material_system");
+  const [filterMaterial, setFilterMaterial] = useState("");
+  const [filterResearcher, setFilterResearcher] = useState("");
+
+  const materials = useMemo(
+    () =>
+      [...new Set(data.map((d) => d.material_system).filter(Boolean))].sort(),
+    [data]
+  );
+  const researchers = useMemo(
+    () => [...new Set(data.map((d) => d.researcher))].sort(),
+    [data]
+  );
+
+  const filtered = useMemo(() => {
+    let result = data;
+    if (filterMaterial) {
+      result = result.filter((d) => d.material_system === filterMaterial);
+    }
+    if (filterResearcher) {
+      result = result.filter((d) => d.researcher === filterResearcher);
+    }
+    return result;
+  }, [data, filterMaterial, filterResearcher]);
+
+  const scatterData = useMemo(() => {
+    return filtered.filter(
+      (d) => d[xAxis] != null && d[yAxis] != null
+    );
+  }, [filtered, xAxis, yAxis]);
+
+  const histogramData = useMemo(() => {
+    return filtered.filter((d) => d[xAxis] != null);
+  }, [filtered, xAxis]);
+
+  const getColor = (d: ExplorerDataPoint): string => {
+    if (colorBy === "material_system") {
+      return MATERIAL_COLORS[d.material_system ?? ""] ?? "#6366f1";
+    }
+    if (colorBy === "researcher") {
+      return RESEARCHER_COLORS[d.researcher] ?? "#6b7280";
+    }
+    if (colorBy === "quality_rating") {
+      const q = d.quality_rating;
+      if (q == null || q < 1 || q > 5) return "#6b7280";
+      return QUALITY_COLORS[q - 1];
+    }
+    return "#6366f1";
+  };
+
+  const xLabel =
+    AXIS_OPTIONS.find((o) => o.value === xAxis)?.label ?? xAxis;
+  const yLabel =
+    AXIS_OPTIONS.find((o) => o.value === yAxis)?.label ?? yAxis;
+
+  return (
+    <div className="space-y-4">
+      {/* Controls */}
+      <div className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg p-4">
+        {/* Plot type */}
+        <div className="flex gap-2 mb-4">
+          {(["scatter", "histogram"] as PlotType[]).map((t) => (
+            <button
+              key={t}
+              onClick={() => setPlotType(t)}
+              className={`px-4 py-1.5 text-sm font-medium rounded-md cursor-pointer transition-colors ${
+                plotType === t
+                  ? "bg-[var(--accent-primary)] text-white"
+                  : "bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:bg-[var(--bg-hover)]"
+              }`}
+            >
+              {t === "scatter" ? "Scatter Plot" : "Histogram"}
+            </button>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          {/* X Axis */}
+          <div>
+            <label className="block text-[10px] font-medium text-[var(--text-muted)] uppercase tracking-wider mb-1">
+              X Axis
+            </label>
+            <select
+              value={xAxis}
+              onChange={(e) => setXAxis(e.target.value)}
+              className={controlClass}
+            >
+              <optgroup label="Deposition">
+                {AXIS_OPTIONS.filter((o) => o.group === "Deposition").map(
+                  (o) => (
+                    <option key={o.value} value={o.value}>
+                      {o.label}
+                    </option>
+                  )
+                )}
+              </optgroup>
+              <optgroup label="Metrics">
+                {AXIS_OPTIONS.filter((o) => o.group === "Metrics").map((o) => (
+                  <option key={o.value} value={o.value}>
+                    {o.label}
+                  </option>
+                ))}
+              </optgroup>
+            </select>
+          </div>
+
+          {/* Y Axis (scatter only) */}
+          {plotType === "scatter" && (
+            <div>
+              <label className="block text-[10px] font-medium text-[var(--text-muted)] uppercase tracking-wider mb-1">
+                Y Axis
+              </label>
+              <select
+                value={yAxis}
+                onChange={(e) => setYAxis(e.target.value)}
+                className={controlClass}
+              >
+                <optgroup label="Deposition">
+                  {AXIS_OPTIONS.filter((o) => o.group === "Deposition").map(
+                    (o) => (
+                      <option key={o.value} value={o.value}>
+                        {o.label}
+                      </option>
+                    )
+                  )}
+                </optgroup>
+                <optgroup label="Metrics">
+                  {AXIS_OPTIONS.filter((o) => o.group === "Metrics").map(
+                    (o) => (
+                      <option key={o.value} value={o.value}>
+                        {o.label}
+                      </option>
+                    )
+                  )}
+                </optgroup>
+              </select>
+            </div>
+          )}
+
+          {/* Color by */}
+          <div>
+            <label className="block text-[10px] font-medium text-[var(--text-muted)] uppercase tracking-wider mb-1">
+              Color By
+            </label>
+            <select
+              value={colorBy}
+              onChange={(e) => setColorBy(e.target.value)}
+              className={controlClass}
+            >
+              {COLOR_BY_OPTIONS.map((o) => (
+                <option key={o.value} value={o.value}>
+                  {o.label}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Filters */}
+          <div className="flex gap-2">
+            <div className="flex-1">
+              <label className="block text-[10px] font-medium text-[var(--text-muted)] uppercase tracking-wider mb-1">
+                Material
+              </label>
+              <select
+                value={filterMaterial}
+                onChange={(e) => setFilterMaterial(e.target.value)}
+                className={controlClass}
+              >
+                <option value="">All</option>
+                {materials.map((m) => (
+                  <option key={m} value={m!}>
+                    {m}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="flex-1">
+              <label className="block text-[10px] font-medium text-[var(--text-muted)] uppercase tracking-wider mb-1">
+                Researcher
+              </label>
+              <select
+                value={filterResearcher}
+                onChange={(e) => setFilterResearcher(e.target.value)}
+                className={controlClass}
+              >
+                <option value="">All</option>
+                {researchers.map((r) => (
+                  <option key={r} value={r}>
+                    {r}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Chart */}
+      <div className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg p-4">
+        {plotType === "scatter" ? (
+          <ScatterPlot
+            data={scatterData}
+            xField={xAxis}
+            yField={yAxis}
+            xLabel={xLabel}
+            yLabel={yLabel}
+            getColor={getColor}
+          />
+        ) : (
+          <Histogram
+            data={histogramData}
+            field={xAxis}
+            label={xLabel}
+            getColor={getColor}
+          />
+        )}
+
+        <div className="text-xs text-[var(--text-muted)] mt-2 text-center">
+          {plotType === "scatter"
+            ? `${scatterData.length} data points`
+            : `${histogramData.length} data points`}{" "}
+          | Click a point to view deposition
+        </div>
+      </div>
+    </div>
+  );
+}

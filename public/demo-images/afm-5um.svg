@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <linearGradient id="heightCmap" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e8c840"/>
+      <stop offset="50%" stop-color="#a0712a"/>
+      <stop offset="100%" stop-color="#5a3a18"/>
+    </linearGradient>
+    <filter id="grain5">
+      <feTurbulence type="fractalNoise" baseFrequency="0.08" numOctaves="6" seed="42" result="noise"/>
+      <feColorMatrix type="saturate" values="0" in="noise" result="grayNoise"/>
+      <feComponentTransfer in="grayNoise" result="mappedNoise">
+        <feFuncR type="table" tableValues="0.22 0.35 0.55 0.72 0.88"/>
+        <feFuncG type="table" tableValues="0.12 0.28 0.44 0.55 0.62"/>
+        <feFuncB type="table" tableValues="0.06 0.10 0.14 0.18 0.22"/>
+      </feComponentTransfer>
+    </filter>
+  </defs>
+  <!-- Background -->
+  <rect width="256" height="256" fill="#1a1d27"/>
+  <!-- Simulated grain texture via noise filter -->
+  <rect width="256" height="256" filter="url(#grain5)" opacity="0.95"/>
+  <!-- Grain-like circles with varying brown-yellow tones -->
+  <circle cx="45" cy="38" r="8" fill="#8b6914" opacity="0.5"/>
+  <circle cx="112" cy="55" r="11" fill="#a07828" opacity="0.45"/>
+  <circle cx="78" cy="92" r="7" fill="#c8a030" opacity="0.55"/>
+  <circle cx="180" cy="42" r="9" fill="#6b4e12" opacity="0.5"/>
+  <circle cx="210" cy="88" r="12" fill="#b89428" opacity="0.4"/>
+  <circle cx="32" cy="140" r="10" fill="#d4b038" opacity="0.35"/>
+  <circle cx="145" cy="110" r="8" fill="#7a5c1a" opacity="0.5"/>
+  <circle cx="88" cy="165" r="13" fill="#c09820" opacity="0.4"/>
+  <circle cx="200" cy="150" r="7" fill="#a88020" opacity="0.55"/>
+  <circle cx="55" cy="200" r="9" fill="#b08818" opacity="0.45"/>
+  <circle cx="130" cy="185" r="11" fill="#8a6a18" opacity="0.5"/>
+  <circle cx="170" cy="200" r="8" fill="#d0a830" opacity="0.4"/>
+  <circle cx="220" cy="180" r="10" fill="#6a4c10" opacity="0.45"/>
+  <circle cx="98" cy="230" r="6" fill="#c4a028" opacity="0.5"/>
+  <circle cx="160" cy="140" r="14" fill="#9a7820" opacity="0.3"/>
+  <circle cx="25" cy="75" r="10" fill="#b49028" opacity="0.4"/>
+  <circle cx="240" cy="120" r="8" fill="#c8a830" opacity="0.45"/>
+  <circle cx="65" cy="125" r="9" fill="#7e6018" opacity="0.5"/>
+  <circle cx="150" cy="65" r="7" fill="#a48828" opacity="0.55"/>
+  <circle cx="195" cy="225" r="11" fill="#8c6c1c" opacity="0.4"/>
+  <circle cx="38" cy="48" r="5" fill="#d8b840" opacity="0.6"/>
+  <circle cx="225" cy="55" r="6" fill="#c0a038" opacity="0.5"/>
+  <circle cx="108" cy="148" r="10" fill="#6e5010" opacity="0.45"/>
+  <circle cx="72" cy="48" r="6" fill="#b89828" opacity="0.55"/>
+  <circle cx="188" cy="108" r="9" fill="#a28020" opacity="0.4"/>
+  <!-- Additional smaller grains -->
+  <rect x="60" y="70" width="5" height="4" rx="2" fill="#c8a430" opacity="0.5" transform="rotate(15 62 72)"/>
+  <rect x="140" y="90" width="6" height="5" rx="2" fill="#8a6818" opacity="0.45" transform="rotate(-20 143 92)"/>
+  <rect x="200" y="160" width="4" height="5" rx="2" fill="#b49428" opacity="0.5" transform="rotate(30 202 162)"/>
+  <rect x="30" y="180" width="7" height="4" rx="2" fill="#a08020" opacity="0.4" transform="rotate(-10 33 182)"/>
+  <rect x="170" y="70" width="5" height="6" rx="2" fill="#d0a830" opacity="0.35" transform="rotate(45 172 73)"/>
+  <rect x="90" y="210" width="6" height="4" rx="2" fill="#7a5c18" opacity="0.5" transform="rotate(8 93 212)"/>
+  <rect x="120" y="30" width="4" height="5" rx="2" fill="#b89020" opacity="0.55" transform="rotate(-35 122 32)"/>
+  <!-- Title -->
+  <text x="8" y="16" fill="white" font-family="Arial, sans-serif" font-size="11" font-weight="bold" opacity="0.9">AFM Topography</text>
+  <!-- Scale bar -->
+  <rect x="185" y="238" width="50" height="3" fill="white" opacity="0.9"/>
+  <text x="195" y="234" fill="white" font-family="Arial, sans-serif" font-size="10" opacity="0.9">5 μm</text>
+</svg>
