@@ -31,7 +31,7 @@ export function DepositionDot({
       r={r}
       fill={color}
       fillOpacity={0.8}
-      stroke={isHovered ? "#0f172a" : "#fff"}
+      stroke={isHovered ? "#ffffff" : "#1a1a1a"}
       strokeWidth={isHovered ? 0.6 : 0.3}
       className="cursor-pointer transition-all"
       onMouseEnter={() => onHover(deposition.id)}
