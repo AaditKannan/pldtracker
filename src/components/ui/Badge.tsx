@@ -1,13 +1,13 @@
 const TYPE_COLORS: Record<string, string> = {
-  XRD: "bg-blue-900/50 text-blue-300",
-  AFM: "bg-green-900/50 text-green-300",
-  PFM: "bg-purple-900/50 text-purple-300",
-  SEM: "bg-orange-900/50 text-orange-300",
-  XRR: "bg-cyan-900/50 text-cyan-300",
-  Raman: "bg-rose-900/50 text-rose-300",
-  profilometry: "bg-amber-900/50 text-amber-300",
-  electrical: "bg-indigo-900/50 text-indigo-300",
-  Other: "bg-slate-700/50 text-slate-300",
+  XRD: "bg-blue-50 text-blue-800 border border-blue-200",
+  AFM: "bg-green-50 text-green-800 border border-green-200",
+  PFM: "bg-purple-50 text-purple-800 border border-purple-200",
+  SEM: "bg-orange-50 text-orange-800 border border-orange-200",
+  XRR: "bg-cyan-50 text-cyan-800 border border-cyan-200",
+  Raman: "bg-rose-50 text-rose-800 border border-rose-200",
+  profilometry: "bg-amber-50 text-amber-800 border border-amber-200",
+  electrical: "bg-indigo-50 text-indigo-800 border border-indigo-200",
+  Other: "bg-slate-100 text-slate-700 border border-slate-200",
 };
 
 export function Badge({ type }: { type: string }) {
