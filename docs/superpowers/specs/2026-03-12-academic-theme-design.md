@@ -80,18 +80,20 @@ Scrollbar track becomes `#f5f4f1`, thumb becomes `#cccbc8`. Range input track be
 ### 1. globals.css
 - Replace all token values with light palette
 - Add `@font-face` declarations for Latin Modern Roman + Mono
-- Update `@theme inline` font references: `--font-sans` → `--font-serif`
+- Update `@theme inline`: change `--font-sans: var(--font-geist-sans)` → `--font-sans: 'Latin Modern Roman', Georgia, 'Times New Roman', serif`
+- Update `@theme inline`: change `--font-mono: var(--font-geist-mono)` → `--font-mono: 'Latin Modern Mono', ui-monospace, monospace`
 - Restyle scrollbar, range input, selection for light theme
-- Remove Geist font dependency from `--font-sans` (keep Geist Mono as mono fallback)
+- Note: The `@theme inline` `--font-sans` override means `font-sans` utility class in layout.tsx body automatically picks up the serif font — no class name change needed there
 
 ### 2. layout.tsx
-- Remove Geist Sans import (keep Geist Mono for fallback)
-- Update body className to use serif font variable
+- Remove both Geist Sans and Geist Mono imports (no longer referenced by `@theme inline`)
+- Body className `font-sans` stays — it now resolves to Latin Modern Roman via the `@theme inline` override
 - Toaster style props already use CSS vars — no change needed
 
 ### 3. NavBar.tsx
 - Currently uses `var()` tokens — will auto-update
 - The `bg-[var(--bg-surface)]/80 backdrop-blur-sm` stays but will now be white/80 with blur — looks good on light
+- Note: "New Deposition" button uses `text-white` on `bg-[var(--accent-primary)]` — keep `text-white` (white text on dark button is correct for light theme)
 
 ### 4. Badge.tsx — Analysis type badges
 **Current:** Dark backgrounds like `bg-blue-900/50 text-blue-300`
@@ -119,6 +121,7 @@ Scrollbar track becomes `#f5f4f1`, thumb becomes `#cccbc8`. Range input track be
 
 ### 7. DiskHeatmap.tsx
 - RGB interpolation values stay the same (these are data colors, preserved per design decision)
+- Default fallback `rgb(148,163,184)` (slate-400) — keep as-is (data color for unknown state)
 
 ### 8. PositionIndicator.tsx
 - Accent stroke `#4f46e5` → `#2a2a2a` (matches new accent)
@@ -151,6 +154,7 @@ Same mapping as ScatterPlot, plus:
 ### 15. Lightbox.tsx
 - `bg-black/90` overlay → keep (lightbox overlays should be dark regardless of theme)
 - `text-white` elements inside lightbox → keep (white text on dark overlay is correct)
+- `text-amber-400/80` highlight note → keep (displayed on dark overlay, amber is appropriate)
 
 ### 16. ScaleBadge.tsx
 - `bg-black/60 text-white` → keep (badge overlaid on images needs dark bg for contrast)
@@ -158,7 +162,7 @@ Same mapping as ScatterPlot, plus:
 ### 17. Camera components
 - CameraView: `bg-black` video container → keep (camera feed bg should be black)
 - CameraView: `bg-emerald-600` capture button → `bg-emerald-700 hover:bg-emerald-600`
-- CameraView: `text-red-400` error → `text-red-600`
+- CameraView: `text-red-400` error → `text-red-600`, `text-red-400/70` subtext → `text-red-600/70`
 - CaptureCard: `bg-black` preview → keep
 - CaptureCard: `bg-black/60` delete button → keep (overlaid on image)
 - StatusBadge: `text-emerald-400` → `text-emerald-600`, `bg-emerald-400` → `bg-emerald-600`
@@ -207,7 +211,7 @@ Source: https://www.gust.org.pl/projects/e-foundry/latin-modern or CDN mirrors.
 16. `src/app/analyses/[id]/page.tsx` — star color
 
 **Files NOT changed** (use CSS vars, auto-update):
-- NavBar.tsx, Dashboard.tsx, DiskVisualization.tsx, DiskTooltip.tsx, DiskLegend.tsx, DiskHeatmap.tsx, DepositionDetail.tsx, DepositionFilters.tsx, SearchBar.tsx, AnalysisListView.tsx, AnalysisUpload.tsx, Card.tsx, Input.tsx, Select.tsx, RangeInput.tsx, CaptureCard.tsx (mostly), all page.tsx server components
+- NavBar.tsx, Dashboard.tsx, DiskVisualization.tsx, DiskTooltip.tsx, DiskLegend.tsx, DiskHeatmap.tsx, DepositionDetail.tsx, DepositionFilters.tsx, SearchBar.tsx, AnalysisListView.tsx, AnalysisUpload.tsx, AnalysisCard.tsx, QuickMetrics.tsx, Card.tsx, Input.tsx, Select.tsx, RangeInput.tsx, CaptureCard.tsx (mostly), all page.tsx server components
 
 **Files kept dark intentionally:**
 - Lightbox.tsx (dark overlay for image viewing)
