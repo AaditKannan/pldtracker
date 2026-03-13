@@ -9,6 +9,8 @@ interface Props {
   isHovered: boolean;
   onHover: (id: string | null) => void;
   onClick: (id: string) => void;
+  overrideX?: number;
+  overrideY?: number;
 }
 
 export function DepositionDot({
@@ -17,10 +19,12 @@ export function DepositionDot({
   isHovered,
   onHover,
   onClick,
+  overrideX,
+  overrideY,
 }: Props) {
-  const x = deposition.x_position ?? 0;
+  const x = overrideX ?? (deposition.x_position ?? 0);
   // Flip Y for SVG (positive Y goes down in SVG, up in physical space)
-  const y = -(deposition.y_position ?? 0);
+  const y = overrideY ?? -(deposition.y_position ?? 0);
   const color = getDepositionColor(deposition, colorMode);
   const r = isHovered ? 3 : 2;
 

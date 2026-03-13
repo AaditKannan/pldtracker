@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { DepositionWithAnalyses, ColorMode, DISK_RADIUS } from "@/lib/types/database";
 import { getColorModeLabel } from "@/lib/utils/colors";
@@ -19,8 +19,6 @@ interface Props {
 const R = DISK_RADIUS;
 const PAD = 8;
 const VB = R + PAD;
-const MIN_ZOOM = 1;
-const MAX_ZOOM = 8;
 
 const COLOR_MODES: ColorMode[] = [
   "quality",
@@ -33,6 +31,41 @@ const COLOR_MODES: ColorMode[] = [
 ];
 const GRID_CIRCLES = [10, 20, 30];
 
+/**
+ * Spread mode: redistribute dots to fill the disk evenly.
+ * Preserves angle, maps radial rank to evenly-spaced radii.
+ */
+function computeSpreadPositions(
+  depositions: DepositionWithAnalyses[]
+): Map<string, { x: number; y: number }> {
+  const withPos = depositions.filter(
+    (d) => d.x_position != null && d.y_position != null
+  );
+  const sorted = [...withPos].sort((a, b) => {
+    const ra = Math.sqrt((a.x_position ?? 0) ** 2 + (a.y_position ?? 0) ** 2);
+    const rb = Math.sqrt((b.x_position ?? 0) ** 2 + (b.y_position ?? 0) ** 2);
+    return ra - rb;
+  });
+
+  const result = new Map<string, { x: number; y: number }>();
+  const n = sorted.length;
+  const maxR = R * 0.82;
+  const minR = 5;
+
+  sorted.forEach((dep, i) => {
+    const ox = dep.x_position ?? 0;
+    const oy = dep.y_position ?? 0;
+    const angle = Math.atan2(-oy, ox); // SVG y is flipped
+    const spreadR = n === 1 ? maxR / 2 : minR + ((maxR - minR) * i) / (n - 1);
+    result.set(dep.id, {
+      x: spreadR * Math.cos(angle),
+      y: spreadR * Math.sin(angle),
+    });
+  });
+
+  return result;
+}
+
 export function DiskVisualization({
   depositions,
   colorMode,
@@ -44,54 +77,26 @@ export function DiskVisualization({
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [heatmapEnabled, setHeatmapEnabled] = useState(false);
-
-  // Zoom & pan state
-  const [zoom, setZoom] = useState(1);
-  const [pan, setPan] = useState({ x: 0, y: 0 });
-  const [isPanning, setIsPanning] = useState(false);
-  const panStart = useRef({ x: 0, y: 0, panX: 0, panY: 0 });
+  const [spread, setSpread] = useState(false);
 
   const activeId = hoveredId ?? highlightId ?? null;
   const hoveredDep = activeId
     ? depositions.find((d) => d.id === activeId)
     : null;
 
+  const spreadPositions = useMemo(
+    () => computeSpreadPositions(depositions),
+    [depositions]
+  );
+
   const handleMouseMove = useCallback(
     (e: React.MouseEvent) => {
       if (!containerRef.current) return;
       const rect = containerRef.current.getBoundingClientRect();
       setMousePos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-
-      if (isPanning) {
-        const dx = (e.clientX - panStart.current.x) / rect.width * (VB * 2) / zoom;
-        const dy = (e.clientY - panStart.current.y) / rect.height * (VB * 2) / zoom;
-        const maxPan = VB * (1 - 1 / zoom);
-        setPan({
-          x: Math.max(-maxPan, Math.min(maxPan, panStart.current.panX - dx)),
-          y: Math.max(-maxPan, Math.min(maxPan, panStart.current.panY - dy)),
-        });
-      }
     },
-    [isPanning, zoom]
+    []
   );
-
-  const handleMouseDown = useCallback(
-    (e: React.MouseEvent) => {
-      if (zoom <= 1) return;
-      setIsPanning(true);
-      panStart.current = { x: e.clientX, y: e.clientY, panX: pan.x, panY: pan.y };
-    },
-    [zoom, pan]
-  );
-
-  const handleMouseUp = useCallback(() => setIsPanning(false), []);
-
-  const resetZoom = () => { setZoom(1); setPan({ x: 0, y: 0 }); };
-
-  // Compute viewBox from zoom/pan
-  const viewSize = (VB * 2) / zoom;
-  const vbX = -VB + pan.x + (VB * 2 - viewSize) / 2;
-  const vbY = -VB + pan.y + (VB * 2 - viewSize) / 2;
 
   // Determine heatmap metric from color mode
   const heatmapMetric =
@@ -113,161 +118,152 @@ export function DiskVisualization({
           <button
             key={mode}
             onClick={() => onColorModeChange(mode)}
-            className={`px-2.5 py-1 text-[11px] font-medium rounded-md transition-colors cursor-pointer ${
+            className={`px-2.5 py-1 text-[11px] font-medium rounded-md transition-colors cursor-pointer border ${
               colorMode === mode
-                ? "bg-[var(--accent-primary)] text-white"
-                : "bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:bg-[var(--bg-hover)] hover:text-[var(--text-primary)]"
+                ? "bg-[var(--accent-primary)] text-white border-[var(--accent-primary)]"
+                : "bg-[var(--bg-surface)] text-[var(--text-secondary)] border-[var(--border-default)] hover:bg-[var(--bg-hover)] hover:text-[var(--text-primary)]"
             }`}
           >
             {getColorModeLabel(mode)}
           </button>
         ))}
-        <span className="w-px bg-[var(--border-subtle)] mx-1" />
+        <span className="w-px bg-[var(--border-default)] mx-1" />
         <button
           onClick={() => setHeatmapEnabled(!heatmapEnabled)}
-          className={`px-2.5 py-1 text-[11px] font-medium rounded-md transition-colors cursor-pointer ${
+          className={`px-2.5 py-1 text-[11px] font-medium rounded-md transition-colors cursor-pointer border ${
             heatmapEnabled
-              ? "bg-[var(--accent-primary)] text-white"
-              : "bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:bg-[var(--bg-hover)] hover:text-[var(--text-primary)]"
+              ? "bg-[var(--accent-primary)] text-white border-[var(--accent-primary)]"
+              : "bg-[var(--bg-surface)] text-[var(--text-secondary)] border-[var(--border-default)] hover:bg-[var(--bg-hover)] hover:text-[var(--text-primary)]"
           }`}
         >
           Heatmap
         </button>
       </div>
 
-      {/* Disk SVG */}
-      <div
-        ref={containerRef}
-        className="relative w-full max-w-[600px] aspect-square select-none"
-        onMouseMove={handleMouseMove}
-        onMouseDown={handleMouseDown}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={() => { setIsPanning(false); }}
-        style={{ cursor: isPanning ? "grabbing" : zoom > 1 ? "grab" : "default" }}
-      >
-        <svg
-          viewBox={`${vbX} ${vbY} ${viewSize} ${viewSize}`}
-          className="w-full h-full"
+      {/* Disk + Legend side by side */}
+      <div className="flex items-start gap-4 w-full">
+        {/* Disk SVG */}
+        <div
+          ref={containerRef}
+          className="relative flex-1 max-w-[600px] aspect-square select-none"
+          onMouseMove={handleMouseMove}
         >
-          {/* Wafer boundary */}
-          <circle
-            cx={0}
-            cy={0}
-            r={R}
-            fill="var(--bg-surface)"
-            stroke="var(--border-default)"
-            strokeWidth={0.4}
-          />
-
-          {/* Concentric reference circles */}
-          {GRID_CIRCLES.map((r) => (
+          <svg
+            viewBox={`${-VB} ${-VB} ${VB * 2} ${VB * 2}`}
+            className="w-full h-full"
+          >
+            {/* Wafer boundary */}
             <circle
-              key={r}
               cx={0}
               cy={0}
-              r={r}
-              fill="none"
-              stroke="var(--border-subtle)"
-              strokeWidth={0.2}
-              strokeDasharray="1.5 1.5"
+              r={R}
+              fill="var(--bg-surface)"
+              stroke="var(--border-default)"
+              strokeWidth={0.4}
             />
-          ))}
 
-          {/* Crosshairs */}
-          <line x1={-R} y1={0} x2={R} y2={0} stroke="var(--border-subtle)" strokeWidth={0.2} />
-          <line x1={0} y1={-R} x2={0} y2={R} stroke="var(--border-subtle)" strokeWidth={0.2} />
+            {/* Concentric reference circles */}
+            {GRID_CIRCLES.map((r) => (
+              <circle
+                key={r}
+                cx={0}
+                cy={0}
+                r={r}
+                fill="none"
+                stroke="var(--border-subtle)"
+                strokeWidth={0.2}
+                strokeDasharray="1.5 1.5"
+              />
+            ))}
 
-          {/* Heatmap layer */}
-          {heatmapEnabled && heatmapMetric && (
-            <DiskHeatmap
-              depositions={depositions}
-              metricName={heatmapMetric}
-              colorMode={colorMode}
-            />
-          )}
+            {/* Crosshairs */}
+            <line x1={-R} y1={0} x2={R} y2={0} stroke="var(--border-subtle)" strokeWidth={0.2} />
+            <line x1={0} y1={-R} x2={0} y2={R} stroke="var(--border-subtle)" strokeWidth={0.2} />
 
-          {/* Plume center marker */}
-          <circle cx={0} cy={0} r={0.8} fill="var(--text-muted)" />
+            {/* Heatmap layer */}
+            {heatmapEnabled && heatmapMetric && !spread && (
+              <DiskHeatmap
+                depositions={depositions}
+                metricName={heatmapMetric}
+                colorMode={colorMode}
+              />
+            )}
 
-          {/* Radial labels */}
-          {GRID_CIRCLES.map((r) => (
-            <text
-              key={r}
-              x={r + 0.5}
-              y={-1}
-              fontSize={2.5}
-              fill="var(--text-muted)"
-              textAnchor="start"
+            {/* Plume center marker */}
+            <circle cx={0} cy={0} r={0.8} fill="var(--text-muted)" />
+
+            {/* Radial labels */}
+            {!spread && GRID_CIRCLES.map((r) => (
+              <text
+                key={r}
+                x={r + 0.5}
+                y={-1}
+                fontSize={2.5}
+                fill="var(--text-muted)"
+                textAnchor="start"
+              >
+                {r}mm
+              </text>
+            ))}
+
+            {/* Spread mode: rank labels along radius */}
+            {spread && (
+              <text
+                x={0}
+                y={-R - 2}
+                fontSize={2.5}
+                fill="var(--text-muted)"
+                textAnchor="middle"
+              >
+                Spread view — angle preserved, distance exaggerated
+              </text>
+            )}
+
+            {/* Deposition dots */}
+            {depositions.map((dep) => {
+              const sp = spread ? spreadPositions.get(dep.id) : undefined;
+              return (
+                <DepositionDot
+                  key={dep.id}
+                  deposition={dep}
+                  colorMode={colorMode}
+                  isHovered={activeId === dep.id}
+                  onHover={setHoveredId}
+                  onClick={(id) => router.push(`/depositions/${id}`)}
+                  overrideX={sp?.x}
+                  overrideY={sp?.y}
+                />
+              );
+            })}
+          </svg>
+
+          {/* Spread toggle overlay */}
+          <div className="absolute top-2 right-2 flex flex-col gap-1">
+            <button
+              onClick={() => setSpread(!spread)}
+              className={`px-2 py-1 rounded text-[10px] font-medium transition-colors cursor-pointer border ${
+                spread
+                  ? "bg-[var(--accent-primary)] text-white border-[var(--accent-primary)]"
+                  : "bg-[var(--bg-surface)] text-[var(--text-secondary)] border-[var(--border-default)] hover:bg-[var(--bg-hover)]"
+              }`}
             >
-              {r}mm
-            </text>
-          ))}
+              {spread ? "True Pos" : "Spread"}
+            </button>
+          </div>
 
-          {/* Deposition dots */}
-          {depositions.map((dep) => (
-            <DepositionDot
-              key={dep.id}
-              deposition={dep}
-              colorMode={colorMode}
-              isHovered={activeId === dep.id}
-              onHover={setHoveredId}
-              onClick={(id) => router.push(`/depositions/${id}`)}
-            />
-          ))}
-        </svg>
-
-        {/* Zoom controls overlay */}
-        <div className="absolute top-2 right-2 flex flex-col gap-1">
-          <button
-            onClick={() => {
-              const nz = Math.min(MAX_ZOOM, zoom + 1);
-              const maxPan = VB * (1 - 1 / nz);
-              setPan({ x: Math.max(-maxPan, Math.min(maxPan, pan.x)), y: Math.max(-maxPan, Math.min(maxPan, pan.y)) });
-              setZoom(nz);
-            }}
-            className="w-7 h-7 rounded bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-hover)] text-sm font-bold flex items-center justify-center cursor-pointer"
-          >
-            +
-          </button>
-          <button
-            onClick={() => {
-              const nz = Math.max(MIN_ZOOM, zoom - 1);
-              if (nz <= 1) resetZoom();
-              else {
-                const maxPan = VB * (1 - 1 / nz);
-                setPan({ x: Math.max(-maxPan, Math.min(maxPan, pan.x)), y: Math.max(-maxPan, Math.min(maxPan, pan.y)) });
-                setZoom(nz);
-              }
-            }}
-            className="w-7 h-7 rounded bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-hover)] text-sm font-bold flex items-center justify-center cursor-pointer"
-          >
-            -
-          </button>
-          <button
-            onClick={resetZoom}
-            className="w-7 h-7 rounded bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-hover)] text-[9px] font-medium flex items-center justify-center cursor-pointer"
-          >
-            1:1
-          </button>
+          {/* Tooltip */}
+          {hoveredDep && hoveredId && (
+            <DiskTooltip deposition={hoveredDep} position={mousePos} />
+          )}
         </div>
 
-        {/* Tooltip */}
-        {hoveredDep && hoveredId && (
-          <DiskTooltip deposition={hoveredDep} position={mousePos} />
-        )}
-      </div>
-
-      {/* Legend */}
-      <div className="w-full max-w-[200px]">
-        <DiskLegend colorMode={colorMode} />
-      </div>
-
-      {/* Count */}
-      <div className="text-xs text-[var(--text-muted)] mt-2">
-        {depositions.length} deposition{depositions.length !== 1 ? "s" : ""}
-        {zoom > 1 && (
-          <span className="ml-2 text-[var(--text-muted)]">{zoom.toFixed(1)}x</span>
-        )}
+        {/* Legend — always visible beside disk */}
+        <div className="w-[140px] shrink-0 pt-4">
+          <DiskLegend colorMode={colorMode} />
+          <div className="text-xs text-[var(--text-muted)] mt-3">
+            {depositions.length} deposition{depositions.length !== 1 ? "s" : ""}
+          </div>
+        </div>
       </div>
     </div>
   );
