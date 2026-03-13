@@ -93,12 +93,12 @@ export function CameraView() {
               </div>
             )}
             {status === "error" && (
-              <div className="absolute inset-0 flex flex-col items-center justify-center text-red-400">
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-red-600">
                 <svg className="w-12 h-12 mb-3 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
                 </svg>
                 <span className="text-sm">Could not access camera</span>
-                <span className="text-xs mt-1 text-red-400/70">Check browser permissions</span>
+                <span className="text-xs mt-1 text-red-600/70">Check browser permissions</span>
               </div>
             )}
           </div>
@@ -123,7 +123,7 @@ export function CameraView() {
             <button
               onClick={captureFrame}
               disabled={status !== "connected"}
-              className="px-4 py-2 text-sm font-medium rounded-md bg-emerald-600 text-white hover:bg-emerald-500 disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer"
+              className="px-4 py-2 text-sm font-medium rounded-md bg-emerald-700 text-white hover:bg-emerald-600 disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer"
             >
               Capture
             </button>

@@ -1,10 +1,10 @@
 import { CameraStatus } from "@/lib/camera/types";
 
 const STATUS_CONFIG: Record<CameraStatus, { color: string; bg: string; label: string }> = {
-  connected: { color: "text-emerald-400", bg: "bg-emerald-400", label: "Connected" },
-  connecting: { color: "text-amber-400", bg: "bg-amber-400", label: "Connecting" },
+  connected: { color: "text-emerald-600", bg: "bg-emerald-600", label: "Connected" },
+  connecting: { color: "text-amber-600", bg: "bg-amber-600", label: "Connecting" },
   disconnected: { color: "text-[var(--text-muted)]", bg: "bg-[var(--text-muted)]", label: "Disconnected" },
-  error: { color: "text-red-400", bg: "bg-red-400", label: "Unavailable" },
+  error: { color: "text-red-600", bg: "bg-red-600", label: "Unavailable" },
 };
 
 export function StatusBadge({ status }: { status: CameraStatus }) {
