@@ -42,7 +42,7 @@ export function PositionIndicator({ x, y }: Props) {
       <circle cx={0} cy={0} r={0.8} fill="var(--text-muted)" />
       {hasPos && (
         <>
-          <circle cx={x} cy={-y} r={2.5} fill="var(--accent-primary)" fillOpacity={0.8} stroke="#4f46e5" strokeWidth={0.4} />
+          <circle cx={x} cy={-y} r={2.5} fill="var(--accent-primary)" fillOpacity={0.8} stroke="#2a2a2a" strokeWidth={0.4} />
           <line x1={0} y1={0} x2={x} y2={-y} stroke="var(--accent-primary)" strokeWidth={0.3} strokeDasharray="1 1" />
         </>
       )}
