@@ -1,27 +1,56 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Latin Modern Roman';
+  src: url('/fonts/lmroman10-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Latin Modern Roman';
+  src: url('/fonts/lmroman10-bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Latin Modern Roman';
+  src: url('/fonts/lmroman10-italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Latin Modern Mono';
+  src: url('/fonts/lmmono10-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* Background layers */
-  --bg-base: #0f1117;
-  --bg-surface: #1a1d27;
-  --bg-elevated: #242736;
-  --bg-hover: #2a2d3a;
+  --bg-base: #faf9f6;
+  --bg-surface: #ffffff;
+  --bg-elevated: #f5f4f1;
+  --bg-hover: #eeedea;
 
   /* Borders */
-  --border-subtle: #2a2d3a;
-  --border-default: #363a4a;
+  --border-subtle: #e0dfdc;
+  --border-default: #cccbc8;
 
   /* Text */
-  --text-primary: #e8eaed;
-  --text-secondary: #9ba1b0;
-  --text-muted: #6b7280;
+  --text-primary: #1a1a1a;
+  --text-secondary: #555555;
+  --text-muted: #999999;
 
   /* Accents */
-  --accent-primary: #6366f1;
-  --accent-primary-hover: #818cf8;
-  --accent-success: #22c55e;
-  --accent-warning: #f59e0b;
-  --accent-danger: #ef4444;
+  --accent-primary: #2a2a2a;
+  --accent-primary-hover: #000000;
+  --accent-success: #16a34a;
+  --accent-warning: #d97706;
+  --accent-danger: #dc2626;
 }
 
 @theme inline {
@@ -34,8 +63,8 @@
   --color-accent: var(--accent-primary);
   --color-accent-hover: var(--accent-primary-hover);
   --color-muted: var(--text-muted);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: 'Latin Modern Roman', Georgia, 'Times New Roman', serif;
+  --font-mono: 'Latin Modern Mono', ui-monospace, monospace;
 }
 
 body {
@@ -50,7 +79,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg-base);
+  background: var(--bg-elevated);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -64,7 +93,7 @@ body {
 
 /* Selection */
 ::selection {
-  background: rgba(99, 102, 241, 0.3);
+  background: rgba(42, 42, 42, 0.15);
   color: var(--text-primary);
 }
 
