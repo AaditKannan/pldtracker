@@ -71,7 +71,7 @@ export function Histogram({ data, field, label }: Props) {
         data={bins}
         margin={{ top: 10, right: 30, bottom: 30, left: 20 }}
       >
-        <CartesianGrid strokeDasharray="3 3" stroke="#2a2d3a" />
+        <CartesianGrid strokeDasharray="3 3" stroke="#e0dfdc" />
         <XAxis
           dataKey="range"
           label={{
@@ -79,14 +79,14 @@ export function Histogram({ data, field, label }: Props) {
             position: "insideBottom",
             offset: -15,
             fontSize: 12,
-            fill: "#9ba1b0",
+            fill: "#555555",
           }}
-          tick={{ fontSize: 10, fill: "#6b7280" }}
+          tick={{ fontSize: 10, fill: "#999999" }}
           interval={0}
           angle={-45}
           textAnchor="end"
           height={60}
-          stroke="#363a4a"
+          stroke="#cccbc8"
         />
         <YAxis
           label={{
@@ -95,11 +95,11 @@ export function Histogram({ data, field, label }: Props) {
             position: "insideLeft",
             offset: 5,
             fontSize: 12,
-            fill: "#9ba1b0",
+            fill: "#555555",
           }}
-          tick={{ fontSize: 11, fill: "#6b7280" }}
+          tick={{ fontSize: 11, fill: "#999999" }}
           allowDecimals={false}
-          stroke="#363a4a"
+          stroke="#cccbc8"
         />
         <Tooltip
           content={({ payload }) => {
@@ -116,7 +116,7 @@ export function Histogram({ data, field, label }: Props) {
             );
           }}
         />
-        <Bar dataKey="count" fill="#6366f1" fillOpacity={0.8} radius={[2, 2, 0, 0]} />
+        <Bar dataKey="count" fill="#2a2a2a" fillOpacity={0.8} radius={[2, 2, 0, 0]} />
       </BarChart>
     </ResponsiveContainer>
   );
