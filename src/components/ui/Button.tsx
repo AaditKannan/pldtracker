@@ -10,7 +10,7 @@ const VARIANT_CLASSES: Record<Variant, string> = {
   secondary:
     "bg-[var(--bg-surface)] text-[var(--text-secondary)] border border-[var(--border-subtle)] hover:bg-[var(--bg-hover)] hover:text-[var(--text-primary)] disabled:opacity-50",
   danger:
-    "bg-red-600 text-white hover:bg-red-500 disabled:opacity-50",
+    "bg-red-600 text-white hover:bg-red-700 disabled:opacity-50",
   ghost:
     "text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-hover)] disabled:opacity-50",
 };
