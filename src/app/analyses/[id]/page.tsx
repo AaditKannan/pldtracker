@@ -232,7 +232,7 @@ export default async function AnalysisDetailPage({ params }: Props) {
                 {dep.quality_rating != null && (
                   <div>
                     <span className="text-[var(--text-muted)]">Quality</span>
-                    <p className="font-medium text-amber-400">
+                    <p className="font-medium text-amber-500">
                       {"★".repeat(dep.quality_rating)}
                       {"☆".repeat(5 - dep.quality_rating)}
                     </p>

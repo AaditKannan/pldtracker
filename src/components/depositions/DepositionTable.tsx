@@ -131,7 +131,7 @@ export function DepositionTable({ depositions }: Props) {
                   <td className="px-3 py-2.5 text-sm text-[var(--text-secondary)] tabular-nums">
                     {dep.oxygen_pressure ?? "—"}
                   </td>
-                  <td className="px-3 py-2.5 text-sm text-amber-400">
+                  <td className="px-3 py-2.5 text-sm text-amber-600">
                     {dep.quality_rating != null
                       ? "★".repeat(dep.quality_rating) +
                         "☆".repeat(5 - dep.quality_rating)

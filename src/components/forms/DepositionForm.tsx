@@ -52,7 +52,7 @@ function StarRatingSelector({
             className="p-0.5 cursor-pointer hover:scale-110 transition-transform"
           >
             <svg
-              className={`w-6 h-6 ${i <= rating ? "text-amber-400" : "text-[var(--border-default)]"}`}
+              className={`w-6 h-6 ${i <= rating ? "text-amber-500" : "text-[var(--border-default)]"}`}
               fill="currentColor"
               viewBox="0 0 20 20"
             >
