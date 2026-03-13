@@ -25,7 +25,12 @@ export function DiskTooltip({ deposition, position }: Props) {
       <div className="text-[var(--text-secondary)] mt-0.5">{deposition.date}</div>
       <div className="text-[var(--text-secondary)]">{deposition.researcher}</div>
       {deposition.substrate_temperature != null && (
-        <div className="text-[var(--text-secondary)]">{deposition.substrate_temperature}°C</div>
+        <div className="text-[var(--text-secondary)]">
+          {deposition.substrate_temperature}°C
+          {deposition.pid_temperature != null && (
+            <span className="text-[var(--text-muted)]"> (PID {deposition.pid_temperature})</span>
+          )}
+        </div>
       )}
       {deposition.pulse_count != null && (
         <div className="text-[var(--text-secondary)]">{deposition.pulse_count} pulses</div>

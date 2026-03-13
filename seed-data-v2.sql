@@ -11,7 +11,7 @@ WITH dep_aorl44 AS (
   INSERT INTO depositions (
     date, researcher, material_system, film_composition, substrate_type,
     substrate_orientation, substrate_size, laser_fluence, laser_frequency,
-    oxygen_pressure, substrate_temperature, target_material,
+    oxygen_pressure, substrate_temperature, pid_temperature, target_material,
     target_rotation_speed, target_substrate_distance, pulse_count,
     x_position, y_position, radial_distance, angle,
     notes, quality_rating,
@@ -20,7 +20,7 @@ WITH dep_aorl44 AS (
   ) VALUES (
     '2026-02-26', 'Ashish', 'SQZ LBFO / DSO', 'La-doped BiFeO3', 'DSO',
     '(110)', '5x5 mm', 2.0, 4,
-    145, 713, 'BFO',
+    145, 713, 946, 'BFO',
     12, 55, 4800,
     -1.2, 0.8, 1.44, 146.3,
     'After temperature calibration. Notebook also shows ''(930C)'' and ''(z = 3.2)'' near this run.', NULL,
@@ -37,7 +37,7 @@ WITH dep_aorl45 AS (
   INSERT INTO depositions (
     date, researcher, material_system, film_composition, substrate_type,
     substrate_orientation, substrate_size, laser_fluence, laser_frequency,
-    oxygen_pressure, substrate_temperature, target_material,
+    oxygen_pressure, substrate_temperature, pid_temperature, target_material,
     target_rotation_speed, target_substrate_distance, pulse_count,
     x_position, y_position, radial_distance, angle,
     notes, quality_rating,
@@ -46,7 +46,7 @@ WITH dep_aorl45 AS (
   ) VALUES (
     '2026-02-28', 'Ashish', 'LBFO / DSO', 'La-doped BiFeO3', 'DSO',
     '(110)', '5x5 mm', 2.0, 4,
-    145, 713, 'BFO',
+    145, 713, 946, 'BFO',
     12, 55, 4800,
     0.3, -1.5, 1.53, -78.7,
     'Notebook shows ''(z = 3.4)'' and ''(good)''.', 4,
@@ -63,7 +63,7 @@ WITH dep_aorl46 AS (
   INSERT INTO depositions (
     date, researcher, material_system, film_composition, substrate_type,
     substrate_orientation, substrate_size, laser_fluence, laser_frequency,
-    oxygen_pressure, substrate_temperature, target_material,
+    oxygen_pressure, substrate_temperature, pid_temperature, target_material,
     target_rotation_speed, target_substrate_distance, pulse_count,
     x_position, y_position, radial_distance, angle,
     notes, quality_rating,
@@ -72,7 +72,7 @@ WITH dep_aorl46 AS (
   ) VALUES (
     '2026-02-28', 'Ashish', 'LBRO / DSO', NULL, 'DSO',
     '(110)', '5x5 mm', NULL, NULL,
-    NULL, NULL, NULL,
+    NULL, NULL, NULL, NULL,
     NULL, NULL, NULL,
     1.0, 1.2, 1.56, 50.2,
     'Repeated AORL45 with cleaned target. Notebook shows ''(z = 3.4)'' and ''(better)''. Likely similar conditions to AORL45 but fields not explicitly recorded.', 5,
@@ -89,7 +89,7 @@ WITH dep_aorl47 AS (
   INSERT INTO depositions (
     date, researcher, material_system, film_composition, substrate_type,
     substrate_orientation, substrate_size, laser_fluence, laser_frequency,
-    oxygen_pressure, substrate_temperature, target_material,
+    oxygen_pressure, substrate_temperature, pid_temperature, target_material,
     target_rotation_speed, target_substrate_distance, pulse_count,
     x_position, y_position, radial_distance, angle,
     notes, quality_rating,
@@ -98,7 +98,7 @@ WITH dep_aorl47 AS (
   ) VALUES (
     '2026-03-01', 'Ashish', 'LBFO / DSO', 'La-doped BiFeO3', 'DSO',
     '(110)', '5x5 mm', 2.0, 4,
-    145, 703, 'BFO',
+    145, 703, 933, 'BFO',
     12, 55, 4800,
     -0.5, -0.7, 0.86, -125.5,
     'Notebook also shows ''(920C)''.', 5,
@@ -115,7 +115,7 @@ WITH dep_aorl48 AS (
   INSERT INTO depositions (
     date, researcher, material_system, film_composition, substrate_type,
     substrate_orientation, substrate_size, laser_fluence, laser_frequency,
-    oxygen_pressure, substrate_temperature, target_material,
+    oxygen_pressure, substrate_temperature, pid_temperature, target_material,
     target_rotation_speed, target_substrate_distance, pulse_count,
     x_position, y_position, radial_distance, angle,
     notes, quality_rating,
@@ -124,7 +124,7 @@ WITH dep_aorl48 AS (
   ) VALUES (
     '2026-03-01', 'Ashish', 'LBFO / DSO', 'La-doped BiFeO3', 'DSO',
     '(110)', '5x5 mm', 2.0, 10,
-    145, 703, 'BFO',
+    145, 703, 933, 'BFO',
     12, 55, 4800,
     1.8, 0.2, 1.81, 6.3,
     'Notebook also shows ''(920C)''. Frequency appears increased to 10 Hz.', 1,
@@ -141,7 +141,7 @@ WITH dep_aorl49 AS (
   INSERT INTO depositions (
     date, researcher, material_system, film_composition, substrate_type,
     substrate_orientation, substrate_size, laser_fluence, laser_frequency,
-    oxygen_pressure, substrate_temperature, target_material,
+    oxygen_pressure, substrate_temperature, pid_temperature, target_material,
     target_rotation_speed, target_substrate_distance, pulse_count,
     x_position, y_position, radial_distance, angle,
     notes, quality_rating,
@@ -150,7 +150,7 @@ WITH dep_aorl49 AS (
   ) VALUES (
     '2026-03-02', 'Ashish', 'LBFO / DSO', 'La-doped BiFeO3', 'DSO',
     '(110)', '5x5 mm', 2.0, 4,
-    145, 693, 'BFO',
+    145, 693, 921, 'BFO',
     12, 55, 4800,
     -1.8, -0.3, 1.82, -170.5,
     'Notebook also seems to show ''(910C)'' in parentheses.', NULL,
@@ -167,7 +167,7 @@ WITH dep_aorl50 AS (
   INSERT INTO depositions (
     date, researcher, material_system, film_composition, substrate_type,
     substrate_orientation, substrate_size, laser_fluence, laser_frequency,
-    oxygen_pressure, substrate_temperature, target_material,
+    oxygen_pressure, substrate_temperature, pid_temperature, target_material,
     target_rotation_speed, target_substrate_distance, pulse_count,
     x_position, y_position, radial_distance, angle,
     notes, quality_rating,
@@ -176,10 +176,10 @@ WITH dep_aorl50 AS (
   ) VALUES (
     '2026-03-02', 'Ashish', 'STO / STO / Si', 'SrTiO3', 'STO / Si',
     '(001)', '10x10 mm', 1.5, 5,
-    110, NULL, 'STO',
+    110, 700.5, 930, 'STO',
     12, 55, 1200,
     0.0, 0.5, 0.50, 90.0,
-    'Raw readout shows 930; real machine temp uncertain. Notebook may also show ''(700)'' in parentheses.', NULL,
+    'PID setpoint 930. Notebook may also show ''(700)'' in parentheses.', NULL,
     'AORL50', 110, 4, 14,
     300, 30
   ) RETURNING id
@@ -193,7 +193,7 @@ WITH dep_aorl51 AS (
   INSERT INTO depositions (
     date, researcher, material_system, film_composition, substrate_type,
     substrate_orientation, substrate_size, laser_fluence, laser_frequency,
-    oxygen_pressure, substrate_temperature, target_material,
+    oxygen_pressure, substrate_temperature, pid_temperature, target_material,
     target_rotation_speed, target_substrate_distance, pulse_count,
     x_position, y_position, radial_distance, angle,
     notes, quality_rating,
@@ -202,10 +202,10 @@ WITH dep_aorl51 AS (
   ) VALUES (
     '2026-03-03', 'Ashish', 'STO / STO / Si', 'SrTiO3', 'STO / Si',
     '(001)', '10x10 mm', 1.5, 5,
-    110, NULL, 'STO',
+    110, 702.9, 933, 'STO',
     12, 55, 1200,
     -0.8, 1.6, 1.79, 116.6,
-    'Raw readout shows 933; real machine temp uncertain. Notebook says ''bad'' and ''leakage was high (136?)''. Also may show ''(710C)'' in parentheses.', 2,
+    'PID setpoint 933. Notebook says ''bad'' and ''leakage was high (136?)''. Also may show ''(710C)'' in parentheses.', 2,
     'AORL51', 110, 4, 14,
     300, 30
   ) RETURNING id
@@ -219,7 +219,7 @@ WITH dep_aorl52 AS (
   INSERT INTO depositions (
     date, researcher, material_system, film_composition, substrate_type,
     substrate_orientation, substrate_size, laser_fluence, laser_frequency,
-    oxygen_pressure, substrate_temperature, target_material,
+    oxygen_pressure, substrate_temperature, pid_temperature, target_material,
     target_rotation_speed, target_substrate_distance, pulse_count,
     x_position, y_position, radial_distance, angle,
     notes, quality_rating,
@@ -228,10 +228,10 @@ WITH dep_aorl52 AS (
   ) VALUES (
     '2026-03-03', 'Ashish', 'STO / STO / Si', 'SrTiO3', 'STO / Si',
     '(001)', '10x10 mm', 1.5, 4,
-    110, NULL, 'STO',
+    110, 684.2, 910, 'STO',
     12, 55, 960,
     0.6, -1.0, 1.17, -59.0,
-    'Raw readout shows 910; real machine temp uncertain.', NULL,
+    'PID setpoint 910.', NULL,
     'AORL52', 110, 4, 14,
     NULL, NULL
   ) RETURNING id
@@ -245,7 +245,7 @@ WITH dep_aorl53 AS (
   INSERT INTO depositions (
     date, researcher, material_system, film_composition, substrate_type,
     substrate_orientation, substrate_size, laser_fluence, laser_frequency,
-    oxygen_pressure, substrate_temperature, target_material,
+    oxygen_pressure, substrate_temperature, pid_temperature, target_material,
     target_rotation_speed, target_substrate_distance, pulse_count,
     x_position, y_position, radial_distance, angle,
     notes, quality_rating,
@@ -254,7 +254,7 @@ WITH dep_aorl53 AS (
   ) VALUES (
     '2026-03-04', 'Ashish', '27% LBFO / DSO', '27% La-doped BiFeO3', 'DSO',
     '(110)', '5x5 mm', 2.0, 4,
-    145, NULL, 'BFO',
+    145, NULL, NULL, 'BFO',
     12, 55, 4800,
     1.4, 1.4, 1.98, 45.0,
     'A value that looks like ''330C'' is written, but it is uncertain / suspicious. Keep temp unstructured.', NULL,
@@ -271,7 +271,7 @@ WITH dep_aorl54 AS (
   INSERT INTO depositions (
     date, researcher, material_system, film_composition, substrate_type,
     substrate_orientation, substrate_size, laser_fluence, laser_frequency,
-    oxygen_pressure, substrate_temperature, target_material,
+    oxygen_pressure, substrate_temperature, pid_temperature, target_material,
     target_rotation_speed, target_substrate_distance, pulse_count,
     x_position, y_position, radial_distance, angle,
     notes, quality_rating,
@@ -280,10 +280,10 @@ WITH dep_aorl54 AS (
   ) VALUES (
     '2026-03-04', 'Ashish', 'S?O / STO / Si', 'S?O', 'STO / Si',
     '(001)', '10x10 mm', 1.5, 4,
-    110, NULL, 'STO',
+    110, 696.5, 925, 'STO',
     12, 55, 1200,
     -1.5, -1.3, 1.98, -139.1,
-    'Raw readout shows 925; real machine temp uncertain. Material label is hard to read; preserved as ''S?O''. Post deposition line appears to read ''PD: 25C/min, 300 Torr''.', NULL,
+    'PID setpoint 925. Material label is hard to read; preserved as ''S?O''. Post deposition line appears to read ''PD: 25C/min, 300 Torr''.', NULL,
     'AORL54', 110, 5, 14,
     300, 25
   ) RETURNING id
@@ -297,7 +297,7 @@ WITH dep_aorl55 AS (
   INSERT INTO depositions (
     date, researcher, material_system, film_composition, substrate_type,
     substrate_orientation, substrate_size, laser_fluence, laser_frequency,
-    oxygen_pressure, substrate_temperature, target_material,
+    oxygen_pressure, substrate_temperature, pid_temperature, target_material,
     target_rotation_speed, target_substrate_distance, pulse_count,
     x_position, y_position, radial_distance, angle,
     notes, quality_rating,
@@ -306,10 +306,10 @@ WITH dep_aorl55 AS (
   ) VALUES (
     '2026-03-04', 'Ashish', '5% LBFO / DSO', '5% La-doped BiFeO3', 'DSO',
     '(110)', '5x5 mm', 2.0, 4,
-    145, NULL, 'BFO',
+    145, 706.9, 938, 'BFO',
     12, 55, 4800,
     0.2, 0.1, 0.22, 26.6,
-    'Raw readout shows 938; real machine temp uncertain.', NULL,
+    'PID setpoint 938.', NULL,
     'AORL55', 150, 20, 14,
     300, 30
   ) RETURNING id
@@ -323,7 +323,7 @@ WITH dep_aorl56 AS (
   INSERT INTO depositions (
     date, researcher, material_system, film_composition, substrate_type,
     substrate_orientation, substrate_size, laser_fluence, laser_frequency,
-    oxygen_pressure, substrate_temperature, target_material,
+    oxygen_pressure, substrate_temperature, pid_temperature, target_material,
     target_rotation_speed, target_substrate_distance, pulse_count,
     x_position, y_position, radial_distance, angle,
     notes, quality_rating,
@@ -332,10 +332,10 @@ WITH dep_aorl56 AS (
   ) VALUES (
     '2026-03-05', 'Ashish', '5% LBFO / DSO', '5% La-doped BiFeO3', 'DSO',
     '(110)', '5x5 mm', 2.0, 4,
-    145, NULL, 'BFO',
+    145, 714.9, 948, 'BFO',
     12, 55, 4800,
     -0.3, 1.8, 1.82, 99.5,
-    'Raw readout shows 948; real machine temp uncertain.', NULL,
+    'PID setpoint 948.', NULL,
     'AORL56', 140, 20, 14,
     300, 30
   ) RETURNING id
@@ -349,7 +349,7 @@ WITH dep_aorl57 AS (
   INSERT INTO depositions (
     date, researcher, material_system, film_composition, substrate_type,
     substrate_orientation, substrate_size, laser_fluence, laser_frequency,
-    oxygen_pressure, substrate_temperature, target_material,
+    oxygen_pressure, substrate_temperature, pid_temperature, target_material,
     target_rotation_speed, target_substrate_distance, pulse_count,
     x_position, y_position, radial_distance, angle,
     notes, quality_rating,
@@ -358,10 +358,10 @@ WITH dep_aorl57 AS (
   ) VALUES (
     '2026-03-05', 'Ashish', 'BFO / DSO', 'BiFeO3', 'DSO',
     '(110)', '5x5 mm', 2.0, 4,
-    145, NULL, 'BFO',
+    145, 706.9, 938, 'BFO',
     12, 55, 4800,
     1.6, -0.9, 1.84, -29.4,
-    'Raw readout shows 938; real machine temp uncertain. Material line reads like ''BFO/DSO''. Handwriting is somewhat ambiguous.', NULL,
+    'PID setpoint 938. Material line reads like ''BFO/DSO''. Handwriting is somewhat ambiguous.', NULL,
     'AORL57', 140, 20, 14,
     NULL, NULL
   ) RETURNING id
@@ -375,7 +375,7 @@ WITH dep_aorl58 AS (
   INSERT INTO depositions (
     date, researcher, material_system, film_composition, substrate_type,
     substrate_orientation, substrate_size, laser_fluence, laser_frequency,
-    oxygen_pressure, substrate_temperature, target_material,
+    oxygen_pressure, substrate_temperature, pid_temperature, target_material,
     target_rotation_speed, target_substrate_distance, pulse_count,
     x_position, y_position, radial_distance, angle,
     notes, quality_rating,
@@ -384,10 +384,10 @@ WITH dep_aorl58 AS (
   ) VALUES (
     '2026-03-06', 'Ashish', 'LBFO / DSO', 'La-doped BiFeO3', 'DSO',
     '(110)', '5x5 mm', 2.0, 4,
-    145, NULL, 'BFO',
+    145, 701.3, 931, 'BFO',
     12, 55, 4800,
     -0.1, -1.9, 1.90, -93.0,
-    'Raw readout shows 931; real machine temp uncertain. Notebook also shows something like ''(9?-22?)'' near the run ID; unclear.', NULL,
+    'PID setpoint 931. Notebook also shows something like ''(9?-22?)'' near the run ID; unclear.', NULL,
     'AORL58', 140, 20, 14,
     NULL, NULL
   ) RETURNING id

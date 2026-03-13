@@ -47,7 +47,7 @@ export function getDepositionColor(
       if (dep.substrate_temperature == null) return GRAY;
       const t = Math.max(
         0,
-        Math.min(1, (dep.substrate_temperature - 200) / 700)
+        Math.min(1, (dep.substrate_temperature - 100) / 700)
       );
       return interpolate(t, "#3b82f6", "#ef4444");
     }

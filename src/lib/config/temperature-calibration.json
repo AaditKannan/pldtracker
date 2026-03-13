@@ -1,0 +1,32 @@
+{
+  "description": "PID setpoint → Real substrate temperature (°C) calibration. Center-of-disk measurement.",
+  "updated": "2026-03-12",
+  "points": [
+    { "pid": 250, "real": 135.5 },
+    { "pid": 300, "real": 157.5 },
+    { "pid": 350, "real": 188.0 },
+    { "pid": 400, "real": 221.8 },
+    { "pid": 450, "real": 259.0 },
+    { "pid": 500, "real": 297.0 },
+    { "pid": 525, "real": 318.5 },
+    { "pid": 550, "real": 350.8 },
+    { "pid": 575, "real": 373.2 },
+    { "pid": 600, "real": 392.0 },
+    { "pid": 625, "real": 413.0 },
+    { "pid": 650, "real": 438.0 },
+    { "pid": 675, "real": 464.0 },
+    { "pid": 700, "real": 494.0 },
+    { "pid": 725, "real": 518.0 },
+    { "pid": 750, "real": 547.0 },
+    { "pid": 775, "real": 570.0 },
+    { "pid": 800, "real": 594.0 },
+    { "pid": 825, "real": 617.0 },
+    { "pid": 850, "real": 640.0 },
+    { "pid": 875, "real": 660.0 },
+    { "pid": 900, "real": 680.0 },
+    { "pid": 925, "real": 702.0 },
+    { "pid": 950, "real": 724.0 },
+    { "pid": 975, "real": 741.0 },
+    { "pid": 1000, "real": 757.0 }
+  ]
+}

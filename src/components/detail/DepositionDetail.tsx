@@ -44,6 +44,9 @@ export function DepositionDetail({ deposition }: Props) {
         <DetailSection title="Growth Conditions">
           <Field label="O₂ Pressure" value={d.oxygen_pressure} unit="mTorr" />
           <Field label="Substrate Temperature" value={d.substrate_temperature} unit="°C" />
+          {d.pid_temperature != null && (
+            <Field label="PID Setpoint" value={d.pid_temperature} unit="°C" />
+          )}
           <Field label="Deposition Time" value={d.deposition_time_min} unit="min" />
         </DetailSection>
 

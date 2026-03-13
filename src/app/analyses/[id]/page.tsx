@@ -226,6 +226,9 @@ export default async function AnalysisDetailPage({ params }: Props) {
                     <span className="text-[var(--text-muted)]">Temperature</span>
                     <p className="font-medium text-[var(--text-primary)]">
                       {dep.substrate_temperature}°C
+                      {dep.pid_temperature != null && (
+                        <span className="text-[var(--text-muted)] text-xs ml-1">(PID {dep.pid_temperature})</span>
+                      )}
                     </p>
                   </div>
                 )}

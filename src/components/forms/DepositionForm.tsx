@@ -10,6 +10,7 @@ import { RangeInput } from "@/components/ui/RangeInput";
 import { createClient } from "@/lib/supabase/client";
 import { DepositionInsert, DISK_RADIUS } from "@/lib/types/database";
 import { cartesianToPolar, polarToCartesian, round2 } from "@/lib/utils/coordinates";
+import { pidToReal } from "@/lib/utils/temperature";
 
 const SUBSTRATE_TYPES = [
   "SrTiO3",
@@ -85,6 +86,7 @@ export function DepositionForm() {
     laser_fluence: "",
     laser_frequency: "",
     oxygen_pressure: "",
+    pid_temperature: "",
     substrate_temperature: "",
     target_material: "",
     target_rotation_speed: "",
@@ -173,6 +175,7 @@ export function DepositionForm() {
       laser_fluence: num(form.laser_fluence),
       laser_frequency: num(form.laser_frequency),
       oxygen_pressure: num(form.oxygen_pressure),
+      pid_temperature: num(form.pid_temperature),
       substrate_temperature: num(form.substrate_temperature),
       target_material: str(form.target_material),
       target_rotation_speed: num(form.target_rotation_speed),
@@ -344,16 +347,31 @@ export function DepositionForm() {
             value={form.oxygen_pressure}
             onChange={(v) => set("oxygen_pressure", v)}
           />
-          <RangeInput
-            label="Substrate Temperature"
-            unit="°C"
-            id="substrate_temperature"
-            min={200}
-            max={950}
-            step={1}
-            value={form.substrate_temperature}
-            onChange={(v) => set("substrate_temperature", v)}
-          />
+          <div className="space-y-1">
+            <RangeInput
+              label="PID Setpoint"
+              unit="°C"
+              id="pid_temperature"
+              min={250}
+              max={1000}
+              step={1}
+              value={form.pid_temperature}
+              onChange={(v) => {
+                const pid = parseFloat(v);
+                const calibrated = !isNaN(pid) ? pidToReal(pid) : NaN;
+                setForm((prev) => ({
+                  ...prev,
+                  pid_temperature: v,
+                  substrate_temperature: !isNaN(calibrated) ? String(calibrated) : "",
+                }));
+              }}
+            />
+            {form.pid_temperature && !isNaN(parseFloat(form.pid_temperature)) && (
+              <p className="text-xs text-[var(--text-muted)]">
+                Real temperature: <span className="font-semibold text-[var(--text-secondary)]">{pidToReal(parseFloat(form.pid_temperature))}°C</span>
+              </p>
+            )}
+          </div>
           <Input
             label="Deposition Time (min)"
             id="deposition_time_min"

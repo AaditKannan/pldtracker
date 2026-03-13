@@ -92,21 +92,21 @@ export function DepositionFilters({ filters, onChange, depositions }: Props) {
         />
       </div>
       <label className="text-[10px] font-medium text-[var(--text-muted)] uppercase tracking-wider mt-1">
-        Pressure Range
+        Laser Energy Range
       </label>
       <div className="flex gap-2">
         <input
           type="number"
-          placeholder="Min mTorr"
-          value={filters.pressure_min}
-          onChange={(e) => set("pressure_min", e.target.value)}
+          placeholder="Min mJ"
+          value={filters.energy_min}
+          onChange={(e) => set("energy_min", e.target.value)}
           className={inputClass}
         />
         <input
           type="number"
-          placeholder="Max mTorr"
-          value={filters.pressure_max}
-          onChange={(e) => set("pressure_max", e.target.value)}
+          placeholder="Max mJ"
+          value={filters.energy_max}
+          onChange={(e) => set("energy_max", e.target.value)}
           className={inputClass}
         />
       </div>

@@ -12,6 +12,7 @@ export interface Deposition {
   laser_frequency: number | null;
   oxygen_pressure: number | null;
   substrate_temperature: number | null;
+  pid_temperature: number | null;
   target_material: string | null;
   target_rotation_speed: number | null;
   target_substrate_distance: number | null;
@@ -163,8 +164,8 @@ export interface FilterState {
   substrate_type: string;
   temperature_min: string;
   temperature_max: string;
-  pressure_min: string;
-  pressure_max: string;
+  energy_min: string;
+  energy_max: string;
   search: string;
 }
 
@@ -174,8 +175,8 @@ export const EMPTY_FILTERS: FilterState = {
   substrate_type: "",
   temperature_min: "",
   temperature_max: "",
-  pressure_min: "",
-  pressure_max: "",
+  energy_min: "",
+  energy_max: "",
   search: "",
 };
 

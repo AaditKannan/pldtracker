@@ -8,6 +8,7 @@ export interface ExplorerDataPoint {
   material_system: string | null;
   substrate_type: string | null;
   substrate_temperature: number | null;
+  pid_temperature: number | null;
   oxygen_pressure: number | null;
   laser_fluence: number | null;
   pulse_count: number | null;
@@ -34,6 +35,7 @@ export interface AxisOption {
 
 export const AXIS_OPTIONS: AxisOption[] = [
   { value: "substrate_temperature", label: "Temperature (°C)", group: "Deposition" },
+  { value: "pid_temperature", label: "PID Setpoint (°C)", group: "Deposition" },
   { value: "oxygen_pressure", label: "O₂ Pressure (mTorr)", group: "Deposition" },
   { value: "laser_fluence", label: "Laser Fluence (J/cm²)", group: "Deposition" },
   { value: "pulse_count", label: "Pulse Count", group: "Deposition" },
@@ -65,6 +67,7 @@ export function flattenDepositionsForExplorer(
     material_system: dep.material_system,
     substrate_type: dep.substrate_type,
     substrate_temperature: dep.substrate_temperature,
+    pid_temperature: dep.pid_temperature,
     oxygen_pressure: dep.oxygen_pressure,
     laser_fluence: dep.laser_fluence,
     pulse_count: dep.pulse_count,

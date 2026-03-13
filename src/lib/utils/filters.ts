@@ -34,15 +34,15 @@ export function applyFilters(
         return false;
     }
 
-    if (filters.pressure_min) {
-      const min = parseFloat(filters.pressure_min);
-      if (dep.oxygen_pressure == null || dep.oxygen_pressure < min)
+    if (filters.energy_min) {
+      const min = parseFloat(filters.energy_min);
+      if (dep.laser_energy_mj == null || dep.laser_energy_mj < min)
         return false;
     }
 
-    if (filters.pressure_max) {
-      const max = parseFloat(filters.pressure_max);
-      if (dep.oxygen_pressure == null || dep.oxygen_pressure > max)
+    if (filters.energy_max) {
+      const max = parseFloat(filters.energy_max);
+      if (dep.laser_energy_mj == null || dep.laser_energy_mj > max)
         return false;
     }
 
