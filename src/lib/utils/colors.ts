@@ -14,7 +14,7 @@ const MATERIAL_COLORS: Record<string, string> = {
   "La0.7Sr0.3MnO3": "#f59e0b",
 };
 
-const GRAY = "#94a3b8";
+const GRAY = "#9ca3af";
 
 function interpolate(t: number, from: string, to: string): string {
   const f = hexToRgb(from);
