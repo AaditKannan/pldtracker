@@ -126,22 +126,28 @@ export function AnalysisCard({ analysis, supabaseUrl, onDelete }: Props) {
       {/* Analysis images (from slide deck or uploads) */}
       {analysis.analysis_images && analysis.analysis_images.length > 0 && (
         <div className="mt-3 border-t border-[var(--border-subtle)] pt-2">
-          <div className={`grid gap-2 ${analysis.analysis_images.length === 1 ? "grid-cols-1" : "grid-cols-2"}`}>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
             {[...analysis.analysis_images]
               .sort((a, b) => a.image_order - b.image_order)
               .map((img) => (
-                <div key={img.id} className="relative group">
-                  <img
-                    src={img.image_url}
-                    alt={img.caption ?? "Analysis image"}
-                    className="w-full rounded border border-[var(--border-subtle)] object-cover aspect-[4/5]"
-                  />
+                <Link
+                  key={img.id}
+                  href={`/analyses/${analysis.id}`}
+                  className="group block"
+                >
                   {img.caption && (
-                    <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-[9px] text-white px-1.5 py-0.5 rounded-b opacity-0 group-hover:opacity-100 transition-opacity truncate">
+                    <div className="text-[9px] text-[var(--text-muted)] mb-0.5 truncate leading-tight">
                       {img.caption}
                     </div>
                   )}
-                </div>
+                  <div className="relative overflow-hidden rounded border border-[var(--border-subtle)] group-hover:border-[var(--accent-primary)] transition-colors aspect-[4/3] bg-[var(--bg-elevated)]">
+                    <img
+                      src={img.image_url}
+                      alt={img.caption ?? "Analysis image"}
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                </Link>
               ))}
           </div>
         </div>

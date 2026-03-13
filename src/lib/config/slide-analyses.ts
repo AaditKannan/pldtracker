@@ -9,6 +9,16 @@
  * SECONDARY SOURCE: ashishmarch export.pdf (slide deck)
  */
 
+export interface SlidePanel {
+  image_path: string;      // panel crop path
+  full_page_path: string;  // full page path for lightbox
+  page_number: number;
+  panel_label: string;     // "AFM Topography", "PFM Amplitude", "PFM Phase", etc.
+  analysis_type: "AFM" | "PFM" | "XRD";
+  scale_text: string | null; // visible scale bar text if known, e.g. "4 μm"
+  notes: string | null;
+}
+
 export interface SlideAnalysis {
   run_id: string;
   analysis_type: "PFM" | "AFM" | "XRD";
@@ -22,6 +32,8 @@ export interface SlideAnalysis {
   source: string;
   /** Label shown on the slide */
   slide_label: string;
+  /** Per-panel metadata for individual panel crops */
+  panels: SlidePanel[];
 }
 
 export interface GrowthParameterReconciliation {
@@ -56,6 +68,17 @@ export const SLIDE_ANALYSES: SlideAnalysis[] = [
     caption: "PFM data: amplitude, phase, and AFM topography (5%@LBFO/DSO)",
     source: "ashishmarch export.pdf",
     slide_label: "PFM Data: AORL45 (5%@LBFO/DSO)",
+    panels: [
+      { image_path: "/analysis/AORL45/page-2-panel-1.png", full_page_path: "/analysis/AORL45/page-2.png", page_number: 2, panel_label: "AFM Topography", analysis_type: "AFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL45/page-2-panel-2.png", full_page_path: "/analysis/AORL45/page-2.png", page_number: 2, panel_label: "PFM Amplitude", analysis_type: "PFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL45/page-2-panel-3.png", full_page_path: "/analysis/AORL45/page-2.png", page_number: 2, panel_label: "PFM Phase", analysis_type: "PFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL45/page-2-panel-4.png", full_page_path: "/analysis/AORL45/page-2.png", page_number: 2, panel_label: "AFM Topography (zoomed)", analysis_type: "AFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL45/page-2-panel-5.png", full_page_path: "/analysis/AORL45/page-2.png", page_number: 2, panel_label: "PFM Amplitude (zoomed)", analysis_type: "PFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL45/page-2-panel-6.png", full_page_path: "/analysis/AORL45/page-2.png", page_number: 2, panel_label: "PFM Phase (zoomed)", analysis_type: "PFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL45/page-3-panel-1.png", full_page_path: "/analysis/AORL45/page-3.png", page_number: 3, panel_label: "AFM Topography", analysis_type: "AFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL45/page-3-panel-2.png", full_page_path: "/analysis/AORL45/page-3.png", page_number: 3, panel_label: "PFM Amplitude", analysis_type: "PFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL45/page-3-panel-3.png", full_page_path: "/analysis/AORL45/page-3.png", page_number: 3, panel_label: "PFM Phase", analysis_type: "PFM", scale_text: null, notes: null },
+    ],
   },
   {
     run_id: "AORL46",
@@ -65,6 +88,14 @@ export const SLIDE_ANALYSES: SlideAnalysis[] = [
     caption: "PFM data: amplitude, phase, and AFM topography (5%@LBFO/DSO)",
     source: "ashishmarch export.pdf",
     slide_label: "PFM Data: AORL46 (5%@LBFO/DSO)",
+    panels: [
+      { image_path: "/analysis/AORL46/page-4-panel-1.png", full_page_path: "/analysis/AORL46/page-4.png", page_number: 4, panel_label: "AFM Topography", analysis_type: "AFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL46/page-4-panel-2.png", full_page_path: "/analysis/AORL46/page-4.png", page_number: 4, panel_label: "PFM Amplitude", analysis_type: "PFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL46/page-4-panel-3.png", full_page_path: "/analysis/AORL46/page-4.png", page_number: 4, panel_label: "PFM Phase", analysis_type: "PFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL46/page-4-panel-4.png", full_page_path: "/analysis/AORL46/page-4.png", page_number: 4, panel_label: "AFM Topography (zoomed)", analysis_type: "AFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL46/page-4-panel-5.png", full_page_path: "/analysis/AORL46/page-4.png", page_number: 4, panel_label: "PFM Amplitude (zoomed)", analysis_type: "PFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL46/page-4-panel-6.png", full_page_path: "/analysis/AORL46/page-4.png", page_number: 4, panel_label: "PFM Phase (zoomed)", analysis_type: "PFM", scale_text: null, notes: null },
+    ],
   },
 
   // --- March records ---
@@ -76,6 +107,17 @@ export const SLIDE_ANALYSES: SlideAnalysis[] = [
     caption: "PFM data: amplitude, phase, and AFM topography (5%@LBFO/DSO)",
     source: "ashishmarch export.pdf",
     slide_label: "PFM Data: AORL47 (5%@LBFO/DSO)",
+    panels: [
+      { image_path: "/analysis/AORL47/page-5-panel-1.png", full_page_path: "/analysis/AORL47/page-5.png", page_number: 5, panel_label: "AFM Topography", analysis_type: "AFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL47/page-5-panel-2.png", full_page_path: "/analysis/AORL47/page-5.png", page_number: 5, panel_label: "PFM Amplitude", analysis_type: "PFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL47/page-5-panel-3.png", full_page_path: "/analysis/AORL47/page-5.png", page_number: 5, panel_label: "PFM Phase", analysis_type: "PFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL47/page-5-panel-4.png", full_page_path: "/analysis/AORL47/page-5.png", page_number: 5, panel_label: "AFM Topography (zoomed)", analysis_type: "AFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL47/page-5-panel-5.png", full_page_path: "/analysis/AORL47/page-5.png", page_number: 5, panel_label: "PFM Amplitude (zoomed)", analysis_type: "PFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL47/page-5-panel-6.png", full_page_path: "/analysis/AORL47/page-5.png", page_number: 5, panel_label: "PFM Phase (zoomed)", analysis_type: "PFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL47/page-6-panel-1.png", full_page_path: "/analysis/AORL47/page-6.png", page_number: 6, panel_label: "AFM Topography", analysis_type: "AFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL47/page-6-panel-2.png", full_page_path: "/analysis/AORL47/page-6.png", page_number: 6, panel_label: "PFM Amplitude", analysis_type: "PFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL47/page-6-panel-3.png", full_page_path: "/analysis/AORL47/page-6.png", page_number: 6, panel_label: "PFM Phase", analysis_type: "PFM", scale_text: null, notes: null },
+    ],
   },
   {
     run_id: "AORL48",
@@ -85,6 +127,14 @@ export const SLIDE_ANALYSES: SlideAnalysis[] = [
     caption: "PFM data: amplitude, phase, and AFM topography (5%@LBFO/DSO)",
     source: "ashishmarch export.pdf",
     slide_label: "PFM Data: AORL48 (5%@LBFO/DSO)",
+    panels: [
+      { image_path: "/analysis/AORL48/page-7-panel-1.png", full_page_path: "/analysis/AORL48/page-7.png", page_number: 7, panel_label: "AFM Topography", analysis_type: "AFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL48/page-7-panel-2.png", full_page_path: "/analysis/AORL48/page-7.png", page_number: 7, panel_label: "PFM Amplitude", analysis_type: "PFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL48/page-7-panel-3.png", full_page_path: "/analysis/AORL48/page-7.png", page_number: 7, panel_label: "PFM Phase", analysis_type: "PFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL48/page-7-panel-4.png", full_page_path: "/analysis/AORL48/page-7.png", page_number: 7, panel_label: "AFM Topography (zoomed)", analysis_type: "AFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL48/page-7-panel-5.png", full_page_path: "/analysis/AORL48/page-7.png", page_number: 7, panel_label: "PFM Amplitude (zoomed)", analysis_type: "PFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL48/page-7-panel-6.png", full_page_path: "/analysis/AORL48/page-7.png", page_number: 7, panel_label: "PFM Phase (zoomed)", analysis_type: "PFM", scale_text: null, notes: null },
+    ],
   },
   {
     run_id: "AORL49",
@@ -94,6 +144,11 @@ export const SLIDE_ANALYSES: SlideAnalysis[] = [
     caption: "PFM data: amplitude, phase, and AFM topography (5%@LBFO/DSO)",
     source: "ashishmarch export.pdf",
     slide_label: "PFM Data: AORL49 (5%@LBFO/DSO)",
+    panels: [
+      { image_path: "/analysis/AORL49/page-8-panel-1.png", full_page_path: "/analysis/AORL49/page-8.png", page_number: 8, panel_label: "AFM Topography", analysis_type: "AFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL49/page-8-panel-2.png", full_page_path: "/analysis/AORL49/page-8.png", page_number: 8, panel_label: "PFM Amplitude", analysis_type: "PFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL49/page-8-panel-3.png", full_page_path: "/analysis/AORL49/page-8.png", page_number: 8, panel_label: "PFM Phase", analysis_type: "PFM", scale_text: null, notes: null },
+    ],
   },
   {
     run_id: "AORL55",
@@ -103,6 +158,14 @@ export const SLIDE_ANALYSES: SlideAnalysis[] = [
     caption: "PFM data: amplitude, phase, and AFM topography (5%@LBFO/DSO)",
     source: "ashishmarch export.pdf",
     slide_label: "PFM Data: AORL55 (5%@LBFO/DSO)",
+    panels: [
+      { image_path: "/analysis/AORL55/page-9-panel-1.png", full_page_path: "/analysis/AORL55/page-9.png", page_number: 9, panel_label: "AFM Topography", analysis_type: "AFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL55/page-9-panel-2.png", full_page_path: "/analysis/AORL55/page-9.png", page_number: 9, panel_label: "PFM Amplitude", analysis_type: "PFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL55/page-9-panel-3.png", full_page_path: "/analysis/AORL55/page-9.png", page_number: 9, panel_label: "PFM Phase", analysis_type: "PFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL55/page-9-panel-4.png", full_page_path: "/analysis/AORL55/page-9.png", page_number: 9, panel_label: "AFM Topography (zoomed)", analysis_type: "AFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL55/page-9-panel-5.png", full_page_path: "/analysis/AORL55/page-9.png", page_number: 9, panel_label: "PFM Amplitude (zoomed)", analysis_type: "PFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL55/page-9-panel-6.png", full_page_path: "/analysis/AORL55/page-9.png", page_number: 9, panel_label: "PFM Phase (zoomed)", analysis_type: "PFM", scale_text: null, notes: null },
+    ],
   },
   {
     run_id: "AORL55",
@@ -112,6 +175,9 @@ export const SLIDE_ANALYSES: SlideAnalysis[] = [
     caption: "XRD theta-2theta scan (5%@LBFO/DSO)",
     source: "ashishmarch export.pdf",
     slide_label: "XRD Data: AORL55 (5%@LBFO/DSO)",
+    panels: [
+      { image_path: "/analysis/AORL55/page-10-xrd.png", full_page_path: "/analysis/AORL55/page-10.png", page_number: 10, panel_label: "XRD θ-2θ", analysis_type: "XRD", scale_text: null, notes: null },
+    ],
   },
   {
     run_id: "AORL56",
@@ -121,6 +187,14 @@ export const SLIDE_ANALYSES: SlideAnalysis[] = [
     caption: "PFM data: amplitude, phase, and AFM topography (5%@LBFO/DSO)",
     source: "ashishmarch export.pdf",
     slide_label: "PFM Data: AORL56 (5%@LBFO/DSO)",
+    panels: [
+      { image_path: "/analysis/AORL56/page-11-panel-1.png", full_page_path: "/analysis/AORL56/page-11.png", page_number: 11, panel_label: "AFM Topography", analysis_type: "AFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL56/page-11-panel-2.png", full_page_path: "/analysis/AORL56/page-11.png", page_number: 11, panel_label: "PFM Amplitude", analysis_type: "PFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL56/page-11-panel-3.png", full_page_path: "/analysis/AORL56/page-11.png", page_number: 11, panel_label: "PFM Phase", analysis_type: "PFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL56/page-11-panel-4.png", full_page_path: "/analysis/AORL56/page-11.png", page_number: 11, panel_label: "AFM Topography (zoomed)", analysis_type: "AFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL56/page-11-panel-5.png", full_page_path: "/analysis/AORL56/page-11.png", page_number: 11, panel_label: "PFM Amplitude (zoomed)", analysis_type: "PFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL56/page-11-panel-6.png", full_page_path: "/analysis/AORL56/page-11.png", page_number: 11, panel_label: "PFM Phase (zoomed)", analysis_type: "PFM", scale_text: null, notes: null },
+    ],
   },
   {
     run_id: "AORL57",
@@ -130,6 +204,14 @@ export const SLIDE_ANALYSES: SlideAnalysis[] = [
     caption: "PFM data: amplitude, phase, and AFM topography (5%@BFO/DSO)",
     source: "ashishmarch export.pdf",
     slide_label: "PFM Data: AORL57 (5%@BFO/DSO)",
+    panels: [
+      { image_path: "/analysis/AORL57/page-12-panel-1.png", full_page_path: "/analysis/AORL57/page-12.png", page_number: 12, panel_label: "AFM Topography", analysis_type: "AFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL57/page-12-panel-2.png", full_page_path: "/analysis/AORL57/page-12.png", page_number: 12, panel_label: "PFM Amplitude", analysis_type: "PFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL57/page-12-panel-3.png", full_page_path: "/analysis/AORL57/page-12.png", page_number: 12, panel_label: "PFM Phase", analysis_type: "PFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL57/page-12-panel-4.png", full_page_path: "/analysis/AORL57/page-12.png", page_number: 12, panel_label: "AFM Topography (zoomed)", analysis_type: "AFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL57/page-12-panel-5.png", full_page_path: "/analysis/AORL57/page-12.png", page_number: 12, panel_label: "PFM Amplitude (zoomed)", analysis_type: "PFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL57/page-12-panel-6.png", full_page_path: "/analysis/AORL57/page-12.png", page_number: 12, panel_label: "PFM Phase (zoomed)", analysis_type: "PFM", scale_text: null, notes: null },
+    ],
   },
   {
     run_id: "AORL58",
@@ -139,6 +221,14 @@ export const SLIDE_ANALYSES: SlideAnalysis[] = [
     caption: "PFM data: amplitude, phase, and AFM topography (5%@LBFO/DSO)",
     source: "ashishmarch export.pdf",
     slide_label: "PFM Data: AORL58 (5%@LBFO/DSO)",
+    panels: [
+      { image_path: "/analysis/AORL58/page-14-panel-1.png", full_page_path: "/analysis/AORL58/page-14.png", page_number: 14, panel_label: "AFM Topography", analysis_type: "AFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL58/page-14-panel-2.png", full_page_path: "/analysis/AORL58/page-14.png", page_number: 14, panel_label: "PFM Amplitude", analysis_type: "PFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL58/page-14-panel-3.png", full_page_path: "/analysis/AORL58/page-14.png", page_number: 14, panel_label: "PFM Phase", analysis_type: "PFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL58/page-14-panel-4.png", full_page_path: "/analysis/AORL58/page-14.png", page_number: 14, panel_label: "AFM Topography (zoomed)", analysis_type: "AFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL58/page-14-panel-5.png", full_page_path: "/analysis/AORL58/page-14.png", page_number: 14, panel_label: "PFM Amplitude (zoomed)", analysis_type: "PFM", scale_text: null, notes: null },
+      { image_path: "/analysis/AORL58/page-14-panel-6.png", full_page_path: "/analysis/AORL58/page-14.png", page_number: 14, panel_label: "PFM Phase (zoomed)", analysis_type: "PFM", scale_text: null, notes: null },
+    ],
   },
 
   // --- Non-March record (kept as reference) ---
@@ -150,6 +240,14 @@ export const SLIDE_ANALYSES: SlideAnalysis[] = [
     caption: "PFM data: amplitude, phase, and AFM topography (5%@LBFO/DSO). Non-March record, included for reference.",
     source: "ashishmarch export.pdf",
     slide_label: "PFM Data: PGRL419 (5%@LBFO/DSO)",
+    panels: [
+      { image_path: "/analysis/PGRL419/page-13-panel-1.png", full_page_path: "/analysis/PGRL419/page-13.png", page_number: 13, panel_label: "AFM Topography", analysis_type: "AFM", scale_text: null, notes: null },
+      { image_path: "/analysis/PGRL419/page-13-panel-2.png", full_page_path: "/analysis/PGRL419/page-13.png", page_number: 13, panel_label: "PFM Amplitude", analysis_type: "PFM", scale_text: null, notes: null },
+      { image_path: "/analysis/PGRL419/page-13-panel-3.png", full_page_path: "/analysis/PGRL419/page-13.png", page_number: 13, panel_label: "PFM Phase", analysis_type: "PFM", scale_text: null, notes: null },
+      { image_path: "/analysis/PGRL419/page-13-panel-4.png", full_page_path: "/analysis/PGRL419/page-13.png", page_number: 13, panel_label: "AFM Topography (zoomed)", analysis_type: "AFM", scale_text: null, notes: null },
+      { image_path: "/analysis/PGRL419/page-13-panel-5.png", full_page_path: "/analysis/PGRL419/page-13.png", page_number: 13, panel_label: "PFM Amplitude (zoomed)", analysis_type: "PFM", scale_text: null, notes: null },
+      { image_path: "/analysis/PGRL419/page-13-panel-6.png", full_page_path: "/analysis/PGRL419/page-13.png", page_number: 13, panel_label: "PFM Phase (zoomed)", analysis_type: "PFM", scale_text: null, notes: null },
+    ],
   },
 ];
 
@@ -233,6 +331,11 @@ export const GROWTH_PARAM_RECONCILIATION: GrowthParameterReconciliation[] = [
 /** Look up all slide analyses for a given run_id */
 export function getSlideAnalyses(runId: string): SlideAnalysis[] {
   return SLIDE_ANALYSES.filter((a) => a.run_id === runId);
+}
+
+/** Get all panels for a given run_id across all slide analyses */
+export function getSlidePanels(runId: string): SlidePanel[] {
+  return SLIDE_ANALYSES.filter(a => a.run_id === runId).flatMap(a => a.panels);
 }
 
 /** Look up growth parameter reconciliation for a given run_id */

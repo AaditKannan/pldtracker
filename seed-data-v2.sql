@@ -875,36 +875,92 @@ SELECT id FROM dep_aorl76;
 -- ============================================================
 -- Analysis entries from slide deck (ashishmarch export.pdf)
 -- Source: Berkeley Materials Science & Engineering slide deck
+-- Panel crops: page-N-panel-M.png (M=1 AFM Topo, 2 PFM Amp, 3 PFM Phase,
+--              4 AFM Topo zoomed, 5 PFM Amp zoomed, 6 PFM Phase zoomed)
 -- ============================================================
 
--- AORL45: PFM analysis (pages 2-3) — February record, kept for analysis
+-- AORL45: AFM analysis (pages 2-3) — February record, kept for analysis
+WITH target_dep AS (
+  SELECT id FROM depositions WHERE run_id = 'AORL45' LIMIT 1
+),
+ana_afm AS (
+  INSERT INTO analyses (deposition_id, analysis_type, operator_name, notes)
+  VALUES ((SELECT id FROM target_dep), 'AFM', 'Ashish',
+    'AFM topography from slide deck. Source: ashishmarch export.pdf pages 2-3.')
+  RETURNING id
+)
+INSERT INTO analysis_images (analysis_id, image_url, caption, scan_size_value, scan_size_unit, image_order)
+VALUES
+  ((SELECT id FROM ana_afm), '/analysis/AORL45/page-2-panel-1.png', 'AFM Topography', NULL, NULL, 0),
+  ((SELECT id FROM ana_afm), '/analysis/AORL45/page-2-panel-4.png', 'AFM Topography (zoomed)', NULL, NULL, 1),
+  ((SELECT id FROM ana_afm), '/analysis/AORL45/page-3-panel-1.png', 'AFM Topography', NULL, NULL, 2);
+
+-- AORL45: PFM analysis (pages 2-3)
 WITH target_dep AS (
   SELECT id FROM depositions WHERE run_id = 'AORL45' LIMIT 1
 ),
 ana_pfm AS (
   INSERT INTO analyses (deposition_id, analysis_type, operator_name, notes)
   VALUES ((SELECT id FROM target_dep), 'PFM', 'Ashish',
-    'PFM amplitude, phase, and AFM topography. Source: ashishmarch export.pdf pages 2-3. Slide label: 5%@LBFO/DSO. Growth params validated by slide.')
+    'PFM amplitude and phase from slide deck. Source: ashishmarch export.pdf pages 2-3. Slide label: 5%@LBFO/DSO. Growth params validated by slide.')
   RETURNING id
 )
 INSERT INTO analysis_images (analysis_id, image_url, caption, scan_size_value, scan_size_unit, image_order)
 VALUES
-  ((SELECT id FROM ana_pfm), '/analysis/AORL45/page-2.png', 'PFM amplitude/phase + AFM (page 2)', NULL, NULL, 0),
-  ((SELECT id FROM ana_pfm), '/analysis/AORL45/page-3.png', 'PFM amplitude/phase + AFM continued (page 3)', NULL, NULL, 1);
+  ((SELECT id FROM ana_pfm), '/analysis/AORL45/page-2-panel-2.png', 'PFM Amplitude', NULL, NULL, 0),
+  ((SELECT id FROM ana_pfm), '/analysis/AORL45/page-2-panel-3.png', 'PFM Phase', NULL, NULL, 1),
+  ((SELECT id FROM ana_pfm), '/analysis/AORL45/page-2-panel-5.png', 'PFM Amplitude (zoomed)', NULL, NULL, 2),
+  ((SELECT id FROM ana_pfm), '/analysis/AORL45/page-2-panel-6.png', 'PFM Phase (zoomed)', NULL, NULL, 3),
+  ((SELECT id FROM ana_pfm), '/analysis/AORL45/page-3-panel-2.png', 'PFM Amplitude', NULL, NULL, 4),
+  ((SELECT id FROM ana_pfm), '/analysis/AORL45/page-3-panel-3.png', 'PFM Phase', NULL, NULL, 5);
 
--- AORL46: PFM analysis (page 4) — February record, kept for analysis
+-- AORL46: AFM analysis (page 4) — February record, kept for analysis
+WITH target_dep AS (
+  SELECT id FROM depositions WHERE run_id = 'AORL46' LIMIT 1
+),
+ana_afm AS (
+  INSERT INTO analyses (deposition_id, analysis_type, operator_name, notes)
+  VALUES ((SELECT id FROM target_dep), 'AFM', 'Ashish',
+    'AFM topography from slide deck. Source: ashishmarch export.pdf page 4.')
+  RETURNING id
+)
+INSERT INTO analysis_images (analysis_id, image_url, caption, scan_size_value, scan_size_unit, image_order)
+VALUES
+  ((SELECT id FROM ana_afm), '/analysis/AORL46/page-4-panel-1.png', 'AFM Topography', NULL, NULL, 0),
+  ((SELECT id FROM ana_afm), '/analysis/AORL46/page-4-panel-4.png', 'AFM Topography (zoomed)', NULL, NULL, 1);
+
+-- AORL46: PFM analysis (page 4)
 WITH target_dep AS (
   SELECT id FROM depositions WHERE run_id = 'AORL46' LIMIT 1
 ),
 ana_pfm AS (
   INSERT INTO analyses (deposition_id, analysis_type, operator_name, notes)
   VALUES ((SELECT id FROM target_dep), 'PFM', 'Ashish',
-    'PFM amplitude, phase, and AFM topography. Source: ashishmarch export.pdf page 4. Slide label: 5%@LBFO/DSO. Growth params validated by slide.')
+    'PFM amplitude and phase from slide deck. Source: ashishmarch export.pdf page 4. Slide label: 5%@LBFO/DSO. Growth params validated by slide.')
   RETURNING id
 )
 INSERT INTO analysis_images (analysis_id, image_url, caption, scan_size_value, scan_size_unit, image_order)
 VALUES
-  ((SELECT id FROM ana_pfm), '/analysis/AORL46/page-4.png', 'PFM amplitude/phase + AFM (page 4)', NULL, NULL, 0);
+  ((SELECT id FROM ana_pfm), '/analysis/AORL46/page-4-panel-2.png', 'PFM Amplitude', NULL, NULL, 0),
+  ((SELECT id FROM ana_pfm), '/analysis/AORL46/page-4-panel-3.png', 'PFM Phase', NULL, NULL, 1),
+  ((SELECT id FROM ana_pfm), '/analysis/AORL46/page-4-panel-5.png', 'PFM Amplitude (zoomed)', NULL, NULL, 2),
+  ((SELECT id FROM ana_pfm), '/analysis/AORL46/page-4-panel-6.png', 'PFM Phase (zoomed)', NULL, NULL, 3);
+
+-- AORL47: AFM analysis (pages 5-6)
+WITH target_dep AS (
+  SELECT id FROM depositions WHERE run_id = 'AORL47' LIMIT 1
+),
+ana_afm AS (
+  INSERT INTO analyses (deposition_id, analysis_type, operator_name, notes)
+  VALUES ((SELECT id FROM target_dep), 'AFM', 'Ashish',
+    'AFM topography from slide deck. Source: ashishmarch export.pdf pages 5-6.')
+  RETURNING id
+)
+INSERT INTO analysis_images (analysis_id, image_url, caption, scan_size_value, scan_size_unit, image_order)
+VALUES
+  ((SELECT id FROM ana_afm), '/analysis/AORL47/page-5-panel-1.png', 'AFM Topography', NULL, NULL, 0),
+  ((SELECT id FROM ana_afm), '/analysis/AORL47/page-5-panel-4.png', 'AFM Topography (zoomed)', NULL, NULL, 1),
+  ((SELECT id FROM ana_afm), '/analysis/AORL47/page-6-panel-1.png', 'AFM Topography', NULL, NULL, 2);
 
 -- AORL47: PFM analysis (pages 5-6)
 WITH target_dep AS (
@@ -913,13 +969,32 @@ WITH target_dep AS (
 ana_pfm AS (
   INSERT INTO analyses (deposition_id, analysis_type, operator_name, notes)
   VALUES ((SELECT id FROM target_dep), 'PFM', 'Ashish',
-    'PFM amplitude, phase, and AFM topography. Source: ashishmarch export.pdf pages 5-6. Slide label: 5%@LBFO/DSO. Growth params validated by slide.')
+    'PFM amplitude and phase from slide deck. Source: ashishmarch export.pdf pages 5-6. Slide label: 5%@LBFO/DSO. Growth params validated by slide.')
   RETURNING id
 )
 INSERT INTO analysis_images (analysis_id, image_url, caption, scan_size_value, scan_size_unit, image_order)
 VALUES
-  ((SELECT id FROM ana_pfm), '/analysis/AORL47/page-5.png', 'PFM amplitude/phase + AFM (page 5)', NULL, NULL, 0),
-  ((SELECT id FROM ana_pfm), '/analysis/AORL47/page-6.png', 'PFM amplitude/phase + AFM continued (page 6)', NULL, NULL, 1);
+  ((SELECT id FROM ana_pfm), '/analysis/AORL47/page-5-panel-2.png', 'PFM Amplitude', NULL, NULL, 0),
+  ((SELECT id FROM ana_pfm), '/analysis/AORL47/page-5-panel-3.png', 'PFM Phase', NULL, NULL, 1),
+  ((SELECT id FROM ana_pfm), '/analysis/AORL47/page-5-panel-5.png', 'PFM Amplitude (zoomed)', NULL, NULL, 2),
+  ((SELECT id FROM ana_pfm), '/analysis/AORL47/page-5-panel-6.png', 'PFM Phase (zoomed)', NULL, NULL, 3),
+  ((SELECT id FROM ana_pfm), '/analysis/AORL47/page-6-panel-2.png', 'PFM Amplitude', NULL, NULL, 4),
+  ((SELECT id FROM ana_pfm), '/analysis/AORL47/page-6-panel-3.png', 'PFM Phase', NULL, NULL, 5);
+
+-- AORL48: AFM analysis (page 7)
+WITH target_dep AS (
+  SELECT id FROM depositions WHERE run_id = 'AORL48' LIMIT 1
+),
+ana_afm AS (
+  INSERT INTO analyses (deposition_id, analysis_type, operator_name, notes)
+  VALUES ((SELECT id FROM target_dep), 'AFM', 'Ashish',
+    'AFM topography from slide deck. Source: ashishmarch export.pdf page 7.')
+  RETURNING id
+)
+INSERT INTO analysis_images (analysis_id, image_url, caption, scan_size_value, scan_size_unit, image_order)
+VALUES
+  ((SELECT id FROM ana_afm), '/analysis/AORL48/page-7-panel-1.png', 'AFM Topography', NULL, NULL, 0),
+  ((SELECT id FROM ana_afm), '/analysis/AORL48/page-7-panel-4.png', 'AFM Topography (zoomed)', NULL, NULL, 1);
 
 -- AORL48: PFM analysis (page 7)
 WITH target_dep AS (
@@ -928,47 +1003,105 @@ WITH target_dep AS (
 ana_pfm AS (
   INSERT INTO analyses (deposition_id, analysis_type, operator_name, notes)
   VALUES ((SELECT id FROM target_dep), 'PFM', 'Ashish',
-    'PFM amplitude, phase, and AFM topography. Source: ashishmarch export.pdf page 7. Slide label: 5%@LBFO/DSO. Growth params validated by slide.')
+    'PFM amplitude and phase from slide deck. Source: ashishmarch export.pdf page 7. Slide label: 5%@LBFO/DSO. Growth params validated by slide.')
   RETURNING id
 )
 INSERT INTO analysis_images (analysis_id, image_url, caption, scan_size_value, scan_size_unit, image_order)
 VALUES
-  ((SELECT id FROM ana_pfm), '/analysis/AORL48/page-7.png', 'PFM amplitude/phase + AFM (page 7)', NULL, NULL, 0);
+  ((SELECT id FROM ana_pfm), '/analysis/AORL48/page-7-panel-2.png', 'PFM Amplitude', NULL, NULL, 0),
+  ((SELECT id FROM ana_pfm), '/analysis/AORL48/page-7-panel-3.png', 'PFM Phase', NULL, NULL, 1),
+  ((SELECT id FROM ana_pfm), '/analysis/AORL48/page-7-panel-5.png', 'PFM Amplitude (zoomed)', NULL, NULL, 2),
+  ((SELECT id FROM ana_pfm), '/analysis/AORL48/page-7-panel-6.png', 'PFM Phase (zoomed)', NULL, NULL, 3);
 
--- AORL49: PFM analysis (page 8) — NOTE: temp conflict (slide 693 vs JSON 698)
+-- AORL49: AFM analysis (page 8) — NOTE: temp conflict (slide 693 vs JSON 698)
+WITH target_dep AS (
+  SELECT id FROM depositions WHERE run_id = 'AORL49' LIMIT 1
+),
+ana_afm AS (
+  INSERT INTO analyses (deposition_id, analysis_type, operator_name, notes)
+  VALUES ((SELECT id FROM target_dep), 'AFM', 'Ashish',
+    'AFM topography from slide deck. Source: ashishmarch export.pdf page 8.')
+  RETURNING id
+)
+INSERT INTO analysis_images (analysis_id, image_url, caption, scan_size_value, scan_size_unit, image_order)
+VALUES
+  ((SELECT id FROM ana_afm), '/analysis/AORL49/page-8-panel-1.png', 'AFM Topography', NULL, NULL, 0);
+
+-- AORL49: PFM analysis (page 8)
 WITH target_dep AS (
   SELECT id FROM depositions WHERE run_id = 'AORL49' LIMIT 1
 ),
 ana_pfm AS (
   INSERT INTO analyses (deposition_id, analysis_type, operator_name, notes)
   VALUES ((SELECT id FROM target_dep), 'PFM', 'Ashish',
-    'PFM amplitude, phase, and AFM topography. Source: ashishmarch export.pdf page 8. Slide label: 5%@LBFO/DSO. CONFLICT: slide temp 693°C vs JSON 698°C — JSON primary.')
+    'PFM amplitude and phase from slide deck. Source: ashishmarch export.pdf page 8. Slide label: 5%@LBFO/DSO. CONFLICT: slide temp 693°C vs JSON 698°C — JSON primary.')
   RETURNING id
 )
 INSERT INTO analysis_images (analysis_id, image_url, caption, scan_size_value, scan_size_unit, image_order)
 VALUES
-  ((SELECT id FROM ana_pfm), '/analysis/AORL49/page-8.png', 'PFM amplitude/phase + AFM (page 8)', NULL, NULL, 0);
+  ((SELECT id FROM ana_pfm), '/analysis/AORL49/page-8-panel-2.png', 'PFM Amplitude', NULL, NULL, 0),
+  ((SELECT id FROM ana_pfm), '/analysis/AORL49/page-8-panel-3.png', 'PFM Phase', NULL, NULL, 1);
 
--- AORL55: PFM analysis (page 9) + XRD analysis (page 10)
+-- AORL55: AFM analysis from slide deck
+WITH target_dep AS (
+  SELECT id FROM depositions WHERE run_id = 'AORL55' LIMIT 1
+),
+ana_afm AS (
+  INSERT INTO analyses (deposition_id, analysis_type, operator_name, notes)
+  VALUES ((SELECT id FROM target_dep), 'AFM', 'Ashish',
+    'AFM topography from slide deck. Source: ashishmarch export.pdf pages 9.')
+  RETURNING id
+)
+INSERT INTO analysis_images (analysis_id, image_url, caption, scan_size_value, scan_size_unit, image_order)
+VALUES
+  ((SELECT id FROM ana_afm), '/analysis/AORL55/page-9-panel-1.png', 'AFM Topography', NULL, NULL, 0),
+  ((SELECT id FROM ana_afm), '/analysis/AORL55/page-9-panel-4.png', 'AFM Topography (zoomed)', NULL, NULL, 1);
+
+-- AORL55: PFM analysis from slide deck
 WITH target_dep AS (
   SELECT id FROM depositions WHERE run_id = 'AORL55' LIMIT 1
 ),
 ana_pfm AS (
   INSERT INTO analyses (deposition_id, analysis_type, operator_name, notes)
   VALUES ((SELECT id FROM target_dep), 'PFM', 'Ashish',
-    'PFM amplitude, phase, and AFM topography. Source: ashishmarch export.pdf page 9. Slide label: 5%@LBFO/DSO. Growth params validated by slide.')
-  RETURNING id
-),
-ana_xrd AS (
-  INSERT INTO analyses (deposition_id, analysis_type, operator_name, notes)
-  VALUES ((SELECT id FROM target_dep), 'XRD', 'Ashish',
-    'Theta-2theta scan. Source: ashishmarch export.pdf page 10. Slide label: 5%@LBFO/DSO. Growth params validated by slide.')
+    'PFM amplitude and phase from slide deck. Source: ashishmarch export.pdf pages 9. Slide label: 5%@LBFO/DSO. Growth params validated by slide.')
   RETURNING id
 )
 INSERT INTO analysis_images (analysis_id, image_url, caption, scan_size_value, scan_size_unit, image_order)
 VALUES
-  ((SELECT id FROM ana_pfm), '/analysis/AORL55/page-9.png', 'PFM amplitude/phase + AFM (page 9)', NULL, NULL, 0),
-  ((SELECT id FROM ana_xrd), '/analysis/AORL55/page-10.png', 'XRD theta-2theta scan (page 10)', NULL, NULL, 0);
+  ((SELECT id FROM ana_pfm), '/analysis/AORL55/page-9-panel-2.png', 'PFM Amplitude', NULL, NULL, 0),
+  ((SELECT id FROM ana_pfm), '/analysis/AORL55/page-9-panel-3.png', 'PFM Phase', NULL, NULL, 1),
+  ((SELECT id FROM ana_pfm), '/analysis/AORL55/page-9-panel-5.png', 'PFM Amplitude (zoomed)', NULL, NULL, 2),
+  ((SELECT id FROM ana_pfm), '/analysis/AORL55/page-9-panel-6.png', 'PFM Phase (zoomed)', NULL, NULL, 3);
+
+-- AORL55: XRD analysis from slide deck
+WITH target_dep AS (
+  SELECT id FROM depositions WHERE run_id = 'AORL55' LIMIT 1
+),
+ana_xrd AS (
+  INSERT INTO analyses (deposition_id, analysis_type, operator_name, notes)
+  VALUES ((SELECT id FROM target_dep), 'XRD', 'Ashish',
+    'XRD theta-2theta scan. Source: ashishmarch export.pdf page 10. Slide label: 5%@LBFO/DSO. Growth params validated by slide.')
+  RETURNING id
+)
+INSERT INTO analysis_images (analysis_id, image_url, caption, scan_size_value, scan_size_unit, image_order)
+VALUES
+  ((SELECT id FROM ana_xrd), '/analysis/AORL55/page-10-xrd.png', 'XRD θ-2θ', NULL, NULL, 0);
+
+-- AORL56: AFM analysis (page 11)
+WITH target_dep AS (
+  SELECT id FROM depositions WHERE run_id = 'AORL56' LIMIT 1
+),
+ana_afm AS (
+  INSERT INTO analyses (deposition_id, analysis_type, operator_name, notes)
+  VALUES ((SELECT id FROM target_dep), 'AFM', 'Ashish',
+    'AFM topography from slide deck. Source: ashishmarch export.pdf page 11.')
+  RETURNING id
+)
+INSERT INTO analysis_images (analysis_id, image_url, caption, scan_size_value, scan_size_unit, image_order)
+VALUES
+  ((SELECT id FROM ana_afm), '/analysis/AORL56/page-11-panel-1.png', 'AFM Topography', NULL, NULL, 0),
+  ((SELECT id FROM ana_afm), '/analysis/AORL56/page-11-panel-4.png', 'AFM Topography (zoomed)', NULL, NULL, 1);
 
 -- AORL56: PFM analysis (page 11)
 WITH target_dep AS (
@@ -977,37 +1110,76 @@ WITH target_dep AS (
 ana_pfm AS (
   INSERT INTO analyses (deposition_id, analysis_type, operator_name, notes)
   VALUES ((SELECT id FROM target_dep), 'PFM', 'Ashish',
-    'PFM amplitude, phase, and AFM topography. Source: ashishmarch export.pdf page 11. Slide label: 5%@LBFO/DSO. Growth params validated by slide.')
+    'PFM amplitude and phase from slide deck. Source: ashishmarch export.pdf page 11. Slide label: 5%@LBFO/DSO. Growth params validated by slide.')
   RETURNING id
 )
 INSERT INTO analysis_images (analysis_id, image_url, caption, scan_size_value, scan_size_unit, image_order)
 VALUES
-  ((SELECT id FROM ana_pfm), '/analysis/AORL56/page-11.png', 'PFM amplitude/phase + AFM (page 11)', NULL, NULL, 0);
+  ((SELECT id FROM ana_pfm), '/analysis/AORL56/page-11-panel-2.png', 'PFM Amplitude', NULL, NULL, 0),
+  ((SELECT id FROM ana_pfm), '/analysis/AORL56/page-11-panel-3.png', 'PFM Phase', NULL, NULL, 1),
+  ((SELECT id FROM ana_pfm), '/analysis/AORL56/page-11-panel-5.png', 'PFM Amplitude (zoomed)', NULL, NULL, 2),
+  ((SELECT id FROM ana_pfm), '/analysis/AORL56/page-11-panel-6.png', 'PFM Phase (zoomed)', NULL, NULL, 3);
 
--- AORL57: PFM analysis (page 12) — BFO/DSO per slide deck
+-- AORL57: AFM analysis (page 12) — BFO/DSO per slide deck
+WITH target_dep AS (
+  SELECT id FROM depositions WHERE run_id = 'AORL57' LIMIT 1
+),
+ana_afm AS (
+  INSERT INTO analyses (deposition_id, analysis_type, operator_name, notes)
+  VALUES ((SELECT id FROM target_dep), 'AFM', 'Ashish',
+    'AFM topography from slide deck. Source: ashishmarch export.pdf page 12. Material confirmed as BFO/DSO by slide deck.')
+  RETURNING id
+)
+INSERT INTO analysis_images (analysis_id, image_url, caption, scan_size_value, scan_size_unit, image_order)
+VALUES
+  ((SELECT id FROM ana_afm), '/analysis/AORL57/page-12-panel-1.png', 'AFM Topography', NULL, NULL, 0),
+  ((SELECT id FROM ana_afm), '/analysis/AORL57/page-12-panel-4.png', 'AFM Topography (zoomed)', NULL, NULL, 1);
+
+-- AORL57: PFM analysis (page 12)
 WITH target_dep AS (
   SELECT id FROM depositions WHERE run_id = 'AORL57' LIMIT 1
 ),
 ana_pfm AS (
   INSERT INTO analyses (deposition_id, analysis_type, operator_name, notes)
   VALUES ((SELECT id FROM target_dep), 'PFM', 'Ashish',
-    'PFM amplitude, phase, and AFM topography. Source: ashishmarch export.pdf page 12. Slide label: 5%@BFO/DSO. Material confirmed as BFO/DSO by slide deck. Growth params validated by slide.')
+    'PFM amplitude and phase from slide deck. Source: ashishmarch export.pdf page 12. Slide label: 5%@BFO/DSO. Material confirmed as BFO/DSO by slide deck. Growth params validated by slide.')
   RETURNING id
 )
 INSERT INTO analysis_images (analysis_id, image_url, caption, scan_size_value, scan_size_unit, image_order)
 VALUES
-  ((SELECT id FROM ana_pfm), '/analysis/AORL57/page-12.png', 'PFM amplitude/phase + AFM (page 12)', NULL, NULL, 0);
+  ((SELECT id FROM ana_pfm), '/analysis/AORL57/page-12-panel-2.png', 'PFM Amplitude', NULL, NULL, 0),
+  ((SELECT id FROM ana_pfm), '/analysis/AORL57/page-12-panel-3.png', 'PFM Phase', NULL, NULL, 1),
+  ((SELECT id FROM ana_pfm), '/analysis/AORL57/page-12-panel-5.png', 'PFM Amplitude (zoomed)', NULL, NULL, 2),
+  ((SELECT id FROM ana_pfm), '/analysis/AORL57/page-12-panel-6.png', 'PFM Phase (zoomed)', NULL, NULL, 3);
 
--- AORL58: PFM analysis (page 14) — NOTE: temp conflict (slide 713 vs calibrated 706.4)
+-- AORL58: AFM analysis (page 14) — NOTE: temp conflict (slide 713 vs calibrated 706.4)
+WITH target_dep AS (
+  SELECT id FROM depositions WHERE run_id = 'AORL58' LIMIT 1
+),
+ana_afm AS (
+  INSERT INTO analyses (deposition_id, analysis_type, operator_name, notes)
+  VALUES ((SELECT id FROM target_dep), 'AFM', 'Ashish',
+    'AFM topography from slide deck. Source: ashishmarch export.pdf page 14.')
+  RETURNING id
+)
+INSERT INTO analysis_images (analysis_id, image_url, caption, scan_size_value, scan_size_unit, image_order)
+VALUES
+  ((SELECT id FROM ana_afm), '/analysis/AORL58/page-14-panel-1.png', 'AFM Topography', NULL, NULL, 0),
+  ((SELECT id FROM ana_afm), '/analysis/AORL58/page-14-panel-4.png', 'AFM Topography (zoomed)', NULL, NULL, 1);
+
+-- AORL58: PFM analysis (page 14)
 WITH target_dep AS (
   SELECT id FROM depositions WHERE run_id = 'AORL58' LIMIT 1
 ),
 ana_pfm AS (
   INSERT INTO analyses (deposition_id, analysis_type, operator_name, notes)
   VALUES ((SELECT id FROM target_dep), 'PFM', 'Ashish',
-    'PFM amplitude, phase, and AFM topography. Source: ashishmarch export.pdf page 14. Slide label: 5%@LBFO/DSO. CONFLICT: slide temp 713°C vs calibrated 706.4°C — JSON/calibrated primary.')
+    'PFM amplitude and phase from slide deck. Source: ashishmarch export.pdf page 14. Slide label: 5%@LBFO/DSO. CONFLICT: slide temp 713°C vs calibrated 706.4°C — JSON/calibrated primary.')
   RETURNING id
 )
 INSERT INTO analysis_images (analysis_id, image_url, caption, scan_size_value, scan_size_unit, image_order)
 VALUES
-  ((SELECT id FROM ana_pfm), '/analysis/AORL58/page-14.png', 'PFM amplitude/phase + AFM (page 14)', NULL, NULL, 0);
+  ((SELECT id FROM ana_pfm), '/analysis/AORL58/page-14-panel-2.png', 'PFM Amplitude', NULL, NULL, 0),
+  ((SELECT id FROM ana_pfm), '/analysis/AORL58/page-14-panel-3.png', 'PFM Phase', NULL, NULL, 1),
+  ((SELECT id FROM ana_pfm), '/analysis/AORL58/page-14-panel-5.png', 'PFM Amplitude (zoomed)', NULL, NULL, 2),
+  ((SELECT id FROM ana_pfm), '/analysis/AORL58/page-14-panel-6.png', 'PFM Phase (zoomed)', NULL, NULL, 3);

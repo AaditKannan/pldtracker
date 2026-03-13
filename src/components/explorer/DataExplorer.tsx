@@ -7,7 +7,6 @@ import {
   COLOR_BY_OPTIONS,
 } from "@/lib/utils/explorer-data";
 import { MATERIAL_COLORS, QUALITY_COLORS } from "@/lib/utils/colors";
-import { linearRegression } from "@/lib/utils/statistics";
 import { ScatterPlot } from "./charts/ScatterPlot";
 import { Histogram } from "./charts/Histogram";
 
@@ -26,7 +25,8 @@ export function DataExplorer({ data }: { data: ExplorerDataPoint[] }) {
   const [xAxis, setXAxis] = useState("substrate_temperature");
   const [yAxis, setYAxis] = useState("fwhm");
   const [colorBy, setColorBy] = useState("material_system");
-  const [showTrend, setShowTrend] = useState(true);
+  const [showBestFit, setShowBestFit] = useState(true);
+  const [showSequence, setShowSequence] = useState(false);
   const [filterMaterial, setFilterMaterial] = useState("");
   const [filterResearcher, setFilterResearcher] = useState("");
 
@@ -252,19 +252,25 @@ export function DataExplorer({ data }: { data: ExplorerDataPoint[] }) {
 
       {/* Chart */}
       <div className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg p-4">
-        {/* Trend toggle (scatter only) */}
+        {/* Overlay toggles (scatter only) */}
         {plotType === "scatter" && (
-          <div className="flex justify-end mb-2">
-            <button
-              onClick={() => setShowTrend(!showTrend)}
-              className={`px-3 py-1 text-xs font-medium rounded cursor-pointer transition-colors ${
-                showTrend
-                  ? "bg-[var(--accent-primary)] text-white"
-                  : "bg-[var(--bg-elevated)] text-[var(--text-secondary)] border border-[var(--border-subtle)]"
-              }`}
-            >
-              Trend Line
-            </button>
+          <div className="flex items-center gap-3 mb-3">
+            <span className="text-[10px] font-medium text-[var(--text-muted)] uppercase tracking-wider">
+              Overlays
+            </span>
+            <OverlayToggle
+              active={showBestFit}
+              onToggle={() => setShowBestFit((v) => !v)}
+              color="#f59e0b"
+              dashed
+              label="Best fit"
+            />
+            <OverlayToggle
+              active={showSequence}
+              onToggle={() => setShowSequence((v) => !v)}
+              color="#60a5fa"
+              label="Deposition sequence"
+            />
           </div>
         )}
 
@@ -276,7 +282,8 @@ export function DataExplorer({ data }: { data: ExplorerDataPoint[] }) {
             xLabel={xLabel}
             yLabel={yLabel}
             getColor={getColor}
-            showTrend={showTrend}
+            showBestFit={showBestFit}
+            showSequence={showSequence}
           />
         ) : (
           <Histogram
@@ -348,5 +355,47 @@ function Stat({ name, value }: { name: string; value: number }) {
       <span className="text-[var(--text-muted)]">{name}</span>
       <span className="font-mono text-[var(--text-primary)]">{value}</span>
     </div>
+  );
+}
+
+// ─── Overlay toggle pill ─────────────────────────────────────────────────────
+
+function OverlayToggle({
+  active,
+  onToggle,
+  color,
+  dashed = false,
+  label,
+}: {
+  active: boolean;
+  onToggle: () => void;
+  color: string;
+  dashed?: boolean;
+  label: string;
+}) {
+  return (
+    <button
+      onClick={onToggle}
+      className={`flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium rounded-md cursor-pointer transition-colors border ${
+        active
+          ? "border-transparent text-white"
+          : "border-[var(--border-subtle)] text-[var(--text-secondary)] bg-[var(--bg-elevated)] opacity-60"
+      }`}
+      style={active ? { backgroundColor: `${color}22`, borderColor: color, color } : {}}
+    >
+      {/* Line preview swatch */}
+      <svg width={18} height={8} viewBox="0 0 18 8" style={{ flexShrink: 0 }}>
+        <line
+          x1={0}
+          y1={4}
+          x2={18}
+          y2={4}
+          stroke={active ? color : "#666"}
+          strokeWidth={2}
+          strokeDasharray={dashed ? "5 3" : undefined}
+        />
+      </svg>
+      {label}
+    </button>
   );
 }

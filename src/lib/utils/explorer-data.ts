@@ -1,6 +1,40 @@
 import { DepositionWithAnalyses } from "../types/database";
 import { getLatestMetricValue } from "./metrics";
 
+/**
+ * Compute a smart [min, max] domain for a chart axis.
+ *
+ * Rules:
+ * - All-same values → expand by ±10% (or ±1 when zero) so the chart isn't a flat line.
+ * - Angular metrics (key name contains "angle") → tight 5% padding; never forced to ±180.
+ * - Normal metrics → 5% padding on each side.
+ */
+export function computeAdaptiveDomain(
+  values: number[],
+  metricKey: string
+): [number, number] {
+  const finite = values.filter((v) => isFinite(v));
+  if (finite.length === 0) return [0, 1];
+
+  const rawMin = Math.min(...finite);
+  const rawMax = Math.max(...finite);
+
+  // All-same-value case
+  if (rawMin === rawMax) {
+    const center = rawMin;
+    if (center === 0) return [-1, 1];
+    const delta = Math.abs(center) * 0.1;
+    return [center - delta, center + delta];
+  }
+
+  const range = rawMax - rawMin;
+  const isAngular = metricKey.toLowerCase().includes("angle");
+  const padFraction = isAngular ? 0.05 : 0.05;
+  const pad = range * padFraction;
+
+  return [rawMin - pad, rawMax + pad];
+}
+
 export interface ExplorerDataPoint {
   deposition_id: string;
   date: string;
