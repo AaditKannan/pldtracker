@@ -123,6 +123,30 @@ export function AnalysisCard({ analysis, supabaseUrl, onDelete }: Props) {
         </div>
       )}
 
+      {/* Analysis images (from slide deck or uploads) */}
+      {analysis.analysis_images && analysis.analysis_images.length > 0 && (
+        <div className="mt-3 border-t border-[var(--border-subtle)] pt-2">
+          <div className={`grid gap-2 ${analysis.analysis_images.length === 1 ? "grid-cols-1" : "grid-cols-2"}`}>
+            {[...analysis.analysis_images]
+              .sort((a, b) => a.image_order - b.image_order)
+              .map((img) => (
+                <div key={img.id} className="relative group">
+                  <img
+                    src={img.image_url}
+                    alt={img.caption ?? "Analysis image"}
+                    className="w-full rounded border border-[var(--border-subtle)] object-cover aspect-[4/5]"
+                  />
+                  {img.caption && (
+                    <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-[9px] text-white px-1.5 py-0.5 rounded-b opacity-0 group-hover:opacity-100 transition-opacity truncate">
+                      {img.caption}
+                    </div>
+                  )}
+                </div>
+              ))}
+          </div>
+        </div>
+      )}
+
       {/* File preview */}
       {fileUrl && (
         <div className="mt-3 border-t border-[var(--border-subtle)] pt-2">

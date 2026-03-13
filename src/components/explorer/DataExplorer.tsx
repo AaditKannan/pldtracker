@@ -14,10 +14,8 @@ import { Histogram } from "./charts/Histogram";
 type PlotType = "scatter" | "histogram";
 
 const RESEARCHER_COLORS: Record<string, string> = {
-  "Alice Chen": "#8b5cf6",
-  "Bob Martinez": "#3b82f6",
-  "Priya Sharma": "#f59e0b",
-  "Aadit": "#22c55e",
+  "Ashish": "#8b5cf6",
+  "Omar": "#3b82f6",
 };
 
 const controlClass =

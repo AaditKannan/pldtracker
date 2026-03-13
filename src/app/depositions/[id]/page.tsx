@@ -28,7 +28,7 @@ export default async function DepositionDetailPage({ params }: Props) {
 
   const { data: analyses } = await supabase
     .from("analyses")
-    .select("*, analysis_metrics(*)")
+    .select("*, analysis_metrics(*), analysis_images(*)")
     .eq("deposition_id", id)
     .order("uploaded_at", { ascending: true });
 

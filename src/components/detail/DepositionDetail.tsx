@@ -1,5 +1,6 @@
 import { Deposition } from "@/lib/types/database";
 import { PositionIndicator } from "./PositionIndicator";
+import { getReconciliation, getSlideAnalyses } from "@/lib/config/slide-analyses";
 
 interface Props {
   deposition: Deposition;
@@ -7,6 +8,8 @@ interface Props {
 
 export function DepositionDetail({ deposition }: Props) {
   const d = deposition;
+  const reconciliation = d.run_id ? getReconciliation(d.run_id) : undefined;
+  const slideAnalyses = d.run_id ? getSlideAnalyses(d.run_id) : [];
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -79,6 +82,51 @@ export function DepositionDetail({ deposition }: Props) {
               {d.notes}
             </p>
           </DetailSection>
+        )}
+
+        {/* Slide Deck Reconciliation */}
+        {reconciliation && (
+          <div>
+            <h3 className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider mb-2">
+              Slide Deck Validation
+            </h3>
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-lg p-3 space-y-2">
+              <div className="flex items-center gap-2">
+                {reconciliation.validated_by_slide ? (
+                  <span className="inline-flex items-center gap-1 text-xs font-medium text-emerald-400">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                    Growth params validated by slide deck
+                  </span>
+                ) : (
+                  <span className="inline-flex items-center gap-1 text-xs font-medium text-amber-400">
+                    <span className="w-2 h-2 rounded-full bg-amber-400" />
+                    Conflicts with slide deck
+                  </span>
+                )}
+                <span className="text-[10px] text-[var(--text-muted)]">
+                  (ashishmarch export.pdf, page 1)
+                </span>
+              </div>
+
+              {reconciliation.conflicts.length > 0 && (
+                <div className="space-y-1">
+                  {reconciliation.conflicts.map((c, i) => (
+                    <div key={i} className="text-xs text-[var(--text-secondary)] bg-[var(--bg-surface)] rounded px-2 py-1.5">
+                      <span className="font-medium text-amber-400">{c.field}:</span>{" "}
+                      JSON={String(c.json_value)}, Slide={String(c.slide_value)}.{" "}
+                      <span className="text-[var(--text-muted)]">{c.resolution}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {slideAnalyses.length > 0 && (
+                <div className="text-xs text-[var(--text-muted)]">
+                  Slide analyses: {slideAnalyses.map((a) => `${a.analysis_type} (p.${a.pages.join(",")})`).join(", ")}
+                </div>
+              )}
+            </div>
+          </div>
         )}
       </div>
 

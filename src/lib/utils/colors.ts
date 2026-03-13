@@ -4,14 +4,13 @@ import { getLatestMetricValue } from "./metrics";
 const QUALITY_COLORS = ["#ef4444", "#f97316", "#eab308", "#84cc16", "#22c55e"];
 
 const MATERIAL_COLORS: Record<string, string> = {
-  BiFeO3: "#8b5cf6",
-  SrTiO3: "#3b82f6",
-  PZT: "#f97316",
-  BaTiO3: "#14b8a6",
-  ZnO: "#84cc16",
-  LaNiO3: "#ec4899",
-  SrRuO3: "#f43f5e",
-  "La0.7Sr0.3MnO3": "#f59e0b",
+  "LBiO/DSO": "#8b5cf6",
+  "STO/STO/Si": "#3b82f6",
+  "BFO/DSO": "#f97316",
+  "5% LBiO/DSO": "#14b8a6",
+  "27% LBiO/DSO": "#ec4899",
+  "SQZ LBFO/DSO": "#f59e0b",
+  "LBRO/DSO": "#f43f5e",
 };
 
 const GRAY = "#9ca3af";
