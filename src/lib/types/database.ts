@@ -103,15 +103,15 @@ export interface MetricDefinition {
 
 export const METRIC_DEFINITIONS: Record<AnalysisType, MetricDefinition[]> = {
   XRD: [
-    { name: "peak_position", label: "Peak Position", unit: "2\u03B8 (deg)" },
+    { name: "peak_position", label: "Peak Position", unit: "2θ (deg)" },
     { name: "fwhm", label: "FWHM", unit: "deg" },
-    { name: "lattice_parameter", label: "Lattice Parameter", unit: "\u00C5" },
-    { name: "d_spacing", label: "d-spacing", unit: "\u00C5" },
+    { name: "lattice_parameter", label: "Lattice Parameter", unit: "Å" },
+    { name: "d_spacing", label: "d-spacing", unit: "Å" },
   ],
   AFM: [
     { name: "rms_roughness", label: "RMS Roughness", unit: "nm" },
     { name: "peak_to_valley", label: "Peak-to-Valley", unit: "nm" },
-    { name: "scan_size", label: "Scan Size", unit: "\u00B5m" },
+    { name: "scan_size", label: "Scan Size", unit: "µm" },
     { name: "grain_size", label: "Avg Grain Size", unit: "nm" },
   ],
   PFM: [
@@ -124,22 +124,22 @@ export const METRIC_DEFINITIONS: Record<AnalysisType, MetricDefinition[]> = {
   ],
   XRR: [
     { name: "thickness", label: "Thickness", unit: "nm" },
-    { name: "density", label: "Density", unit: "g/cm\u00B3" },
+    { name: "density", label: "Density", unit: "g/cm³" },
     { name: "roughness", label: "Surface Roughness", unit: "nm" },
   ],
   Raman: [
-    { name: "peak_position", label: "Peak Position", unit: "cm\u207B\u00B9" },
+    { name: "peak_position", label: "Peak Position", unit: "cm⁻¹" },
     { name: "peak_intensity", label: "Peak Intensity", unit: "a.u." },
-    { name: "fwhm", label: "FWHM", unit: "cm\u207B\u00B9" },
+    { name: "fwhm", label: "FWHM", unit: "cm⁻¹" },
   ],
   profilometry: [
     { name: "step_height", label: "Step Height", unit: "nm" },
     { name: "film_thickness", label: "Film Thickness", unit: "nm" },
   ],
   electrical: [
-    { name: "resistivity", label: "Resistivity", unit: "\u03A9\u00B7cm" },
-    { name: "sheet_resistance", label: "Sheet Resistance", unit: "\u03A9/sq" },
-    { name: "carrier_density", label: "Carrier Density", unit: "cm\u207B\u00B3" },
+    { name: "resistivity", label: "Resistivity", unit: "Ω·cm" },
+    { name: "sheet_resistance", label: "Sheet Resistance", unit: "Ω/sq" },
+    { name: "carrier_density", label: "Carrier Density", unit: "cm⁻³" },
   ],
   Other: [],
 };

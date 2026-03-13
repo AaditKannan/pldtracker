@@ -89,7 +89,7 @@ export function getColorModeLabel(mode: ColorMode): string {
     case "temperature":
       return "Temperature";
     case "pressure":
-      return "O\u2082 Pressure";
+      return "O₂ Pressure";
     case "roughness":
       return "Roughness";
     case "fwhm":

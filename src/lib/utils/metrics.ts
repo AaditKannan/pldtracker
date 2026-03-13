@@ -26,6 +26,6 @@ export const KEY_METRICS = [
   { name: "rms_roughness", label: "Roughness", format: (v: number) => `${v.toFixed(1)} nm` },
   { name: "film_thickness", label: "Thickness", format: (v: number) => `${v.toFixed(0)} nm` },
   { name: "d33", label: "d33", format: (v: number) => `${v.toFixed(1)} pm/V` },
-  { name: "resistivity", label: "Resistivity", format: (v: number) => `${v.toExponential(1)} \u03A9\u00B7cm` },
-  { name: "lattice_parameter", label: "Lattice Param", format: (v: number) => `${v.toFixed(3)} \u00C5` },
+  { name: "resistivity", label: "Resistivity", format: (v: number) => `${v.toExponential(1)} Ω·cm` },
+  { name: "lattice_parameter", label: "Lattice Param", format: (v: number) => `${v.toFixed(3)} Å` },
 ] as const;

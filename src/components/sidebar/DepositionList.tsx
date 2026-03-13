@@ -64,11 +64,11 @@ export function DepositionList({ depositions, highlightId, onHover }: Props) {
           </div>
           <div className="text-xs text-[var(--text-secondary)] mt-0.5">
             {dep.researcher}
-            {dep.substrate_type && ` \u00B7 ${dep.substrate_type}`}
+            {dep.substrate_type && ` · ${dep.substrate_type}`}
           </div>
           <div className="flex items-center gap-2 text-xs text-[var(--text-muted)] mt-0.5">
             {dep.substrate_temperature != null && (
-              <span>{dep.substrate_temperature}\u00B0C</span>
+              <span>{dep.substrate_temperature}°C</span>
             )}
             {dep.oxygen_pressure != null && (
               <span>{dep.oxygen_pressure} mTorr</span>

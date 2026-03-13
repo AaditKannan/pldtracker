@@ -210,7 +210,7 @@ export default async function AnalysisDetailPage({ params }: Props) {
                 <div>
                   <span className="text-[var(--text-muted)]">Material</span>
                   <p className="font-medium text-[var(--text-primary)]">
-                    {dep.material_system ?? "\u2014"}
+                    {dep.material_system ?? "—"}
                   </p>
                 </div>
                 <div>
@@ -225,7 +225,7 @@ export default async function AnalysisDetailPage({ params }: Props) {
                   <div>
                     <span className="text-[var(--text-muted)]">Temperature</span>
                     <p className="font-medium text-[var(--text-primary)]">
-                      {dep.substrate_temperature}\u00B0C
+                      {dep.substrate_temperature}°C
                     </p>
                   </div>
                 )}
@@ -233,8 +233,8 @@ export default async function AnalysisDetailPage({ params }: Props) {
                   <div>
                     <span className="text-[var(--text-muted)]">Quality</span>
                     <p className="font-medium text-amber-400">
-                      {"\u2605".repeat(dep.quality_rating)}
-                      {"\u2606".repeat(5 - dep.quality_rating)}
+                      {"★".repeat(dep.quality_rating)}
+                      {"☆".repeat(5 - dep.quality_rating)}
                     </p>
                   </div>
                 )}

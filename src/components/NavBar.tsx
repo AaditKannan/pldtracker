@@ -8,6 +8,7 @@ const NAV_LINKS = [
   { href: "/depositions", label: "Depositions" },
   { href: "/analyses", label: "Analyses" },
   { href: "/explorer", label: "Data Explorer" },
+  { href: "/camera", label: "Positioning" },
 ];
 
 export default function NavBar() {

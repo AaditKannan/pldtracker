@@ -36,7 +36,7 @@ export function ScatterPlot({
     x: d[xField] as number,
     y: d[yField] as number,
     id: d.deposition_id,
-    material: d.material_system ?? "\u2014",
+    material: d.material_system ?? "—",
     researcher: d.researcher,
     color: getColor(d),
   }));

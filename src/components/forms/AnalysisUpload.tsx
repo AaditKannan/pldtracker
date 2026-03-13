@@ -195,7 +195,7 @@ export function AnalysisUpload({ depositionId, onUploaded }: Props) {
                   onChange={(e) =>
                     handleMetricChange(def.name, e.target.value)
                   }
-                  placeholder="\u2014"
+                  placeholder="—"
                   className="flex-1 min-w-0 px-2 py-1.5 border border-[var(--border-subtle)] rounded text-sm bg-[var(--bg-elevated)] text-[var(--text-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--accent-primary)]"
                 />
                 <span className="text-xs text-[var(--text-muted)] w-16 shrink-0">

@@ -108,7 +108,7 @@ export function Histogram({ data, field, label }: Props) {
             return (
               <div className="bg-[var(--bg-elevated)] text-[var(--text-primary)] text-xs rounded-lg px-3 py-2 shadow-lg border border-[var(--border-subtle)]">
                 <div>
-                  Range: {Number(d.min).toPrecision(3)} \u2013{" "}
+                  Range: {Number(d.min).toPrecision(3)} –{" "}
                   {Number(d.max).toPrecision(3)}
                 </div>
                 <div className="font-semibold">Count: {d.count}</div>

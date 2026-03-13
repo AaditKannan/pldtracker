@@ -21,19 +21,19 @@ export function DiskTooltip({ deposition, position }: Props) {
         top: position.y - 10,
       }}
     >
-      <div className="font-semibold">{deposition.material_system ?? "\u2014"}</div>
+      <div className="font-semibold">{deposition.material_system ?? "—"}</div>
       <div className="text-[var(--text-secondary)] mt-0.5">{deposition.date}</div>
       <div className="text-[var(--text-secondary)]">{deposition.researcher}</div>
       {deposition.substrate_temperature != null && (
-        <div className="text-[var(--text-secondary)]">{deposition.substrate_temperature}\u00B0C</div>
+        <div className="text-[var(--text-secondary)]">{deposition.substrate_temperature}°C</div>
       )}
       {deposition.pulse_count != null && (
         <div className="text-[var(--text-secondary)]">{deposition.pulse_count} pulses</div>
       )}
       {deposition.quality_rating != null && (
         <div className="text-[var(--text-secondary)]">
-          Quality: {"\u2605".repeat(deposition.quality_rating)}
-          {"\u2606".repeat(5 - deposition.quality_rating)}
+          Quality: {"★".repeat(deposition.quality_rating)}
+          {"☆".repeat(5 - deposition.quality_rating)}
         </div>
       )}
       {(fwhm != null || roughness != null || thickness != null) && (

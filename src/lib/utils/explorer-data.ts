@@ -33,19 +33,19 @@ export interface AxisOption {
 }
 
 export const AXIS_OPTIONS: AxisOption[] = [
-  { value: "substrate_temperature", label: "Temperature (\u00B0C)", group: "Deposition" },
-  { value: "oxygen_pressure", label: "O\u2082 Pressure (mTorr)", group: "Deposition" },
-  { value: "laser_fluence", label: "Laser Fluence (J/cm\u00B2)", group: "Deposition" },
+  { value: "substrate_temperature", label: "Temperature (°C)", group: "Deposition" },
+  { value: "oxygen_pressure", label: "O₂ Pressure (mTorr)", group: "Deposition" },
+  { value: "laser_fluence", label: "Laser Fluence (J/cm²)", group: "Deposition" },
   { value: "pulse_count", label: "Pulse Count", group: "Deposition" },
   { value: "quality_rating", label: "Quality Rating", group: "Deposition" },
   { value: "radial_distance", label: "Radial Distance (mm)", group: "Deposition" },
-  { value: "angle", label: "Angle (\u00B0)", group: "Deposition" },
+  { value: "angle", label: "Angle (°)", group: "Deposition" },
   { value: "fwhm", label: "FWHM (deg)", group: "Metrics" },
   { value: "rms_roughness", label: "Roughness (nm)", group: "Metrics" },
   { value: "film_thickness", label: "Film Thickness (nm)", group: "Metrics" },
   { value: "d33", label: "d33 (pm/V)", group: "Metrics" },
-  { value: "resistivity", label: "Resistivity (\u03A9\u00B7cm)", group: "Metrics" },
-  { value: "lattice_parameter", label: "Lattice Parameter (\u00C5)", group: "Metrics" },
+  { value: "resistivity", label: "Resistivity (Ω·cm)", group: "Metrics" },
+  { value: "lattice_parameter", label: "Lattice Parameter (Å)", group: "Metrics" },
 ];
 
 export const COLOR_BY_OPTIONS = [

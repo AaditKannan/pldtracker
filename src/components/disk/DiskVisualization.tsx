@@ -75,24 +75,6 @@ export function DiskVisualization({
     [isPanning, zoom]
   );
 
-  const handleWheel = useCallback(
-    (e: React.WheelEvent) => {
-      e.preventDefault();
-      const newZoom = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, zoom * (e.deltaY < 0 ? 1.15 : 0.87)));
-      if (newZoom === 1) {
-        setPan({ x: 0, y: 0 });
-      } else {
-        const maxPan = VB * (1 - 1 / newZoom);
-        setPan({
-          x: Math.max(-maxPan, Math.min(maxPan, pan.x)),
-          y: Math.max(-maxPan, Math.min(maxPan, pan.y)),
-        });
-      }
-      setZoom(newZoom);
-    },
-    [zoom, pan]
-  );
-
   const handleMouseDown = useCallback(
     (e: React.MouseEvent) => {
       if (zoom <= 1) return;
@@ -158,7 +140,6 @@ export function DiskVisualization({
         ref={containerRef}
         className="relative w-full max-w-[600px] aspect-square select-none"
         onMouseMove={handleMouseMove}
-        onWheel={handleWheel}
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
         onMouseLeave={() => { setIsPanning(false); }}
@@ -236,32 +217,39 @@ export function DiskVisualization({
         </svg>
 
         {/* Zoom controls overlay */}
-        {zoom > 1 && (
-          <div className="absolute top-2 right-2 flex flex-col gap-1">
-            <button
-              onClick={() => setZoom(Math.min(MAX_ZOOM, zoom * 1.3))}
-              className="w-7 h-7 rounded bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-hover)] text-sm font-bold flex items-center justify-center cursor-pointer"
-            >
-              +
-            </button>
-            <button
-              onClick={() => {
-                const nz = Math.max(MIN_ZOOM, zoom * 0.7);
-                if (nz <= 1.05) resetZoom();
-                else setZoom(nz);
-              }}
-              className="w-7 h-7 rounded bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-hover)] text-sm font-bold flex items-center justify-center cursor-pointer"
-            >
-              -
-            </button>
-            <button
-              onClick={resetZoom}
-              className="w-7 h-7 rounded bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-hover)] text-[9px] font-medium flex items-center justify-center cursor-pointer"
-            >
-              1:1
-            </button>
-          </div>
-        )}
+        <div className="absolute top-2 right-2 flex flex-col gap-1">
+          <button
+            onClick={() => {
+              const nz = Math.min(MAX_ZOOM, zoom + 1);
+              const maxPan = VB * (1 - 1 / nz);
+              setPan({ x: Math.max(-maxPan, Math.min(maxPan, pan.x)), y: Math.max(-maxPan, Math.min(maxPan, pan.y)) });
+              setZoom(nz);
+            }}
+            className="w-7 h-7 rounded bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-hover)] text-sm font-bold flex items-center justify-center cursor-pointer"
+          >
+            +
+          </button>
+          <button
+            onClick={() => {
+              const nz = Math.max(MIN_ZOOM, zoom - 1);
+              if (nz <= 1) resetZoom();
+              else {
+                const maxPan = VB * (1 - 1 / nz);
+                setPan({ x: Math.max(-maxPan, Math.min(maxPan, pan.x)), y: Math.max(-maxPan, Math.min(maxPan, pan.y)) });
+                setZoom(nz);
+              }
+            }}
+            className="w-7 h-7 rounded bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-hover)] text-sm font-bold flex items-center justify-center cursor-pointer"
+          >
+            -
+          </button>
+          <button
+            onClick={resetZoom}
+            className="w-7 h-7 rounded bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-hover)] text-[9px] font-medium flex items-center justify-center cursor-pointer"
+          >
+            1:1
+          </button>
+        </div>
 
         {/* Tooltip */}
         {hoveredDep && hoveredId && (

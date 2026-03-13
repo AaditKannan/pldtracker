@@ -22,8 +22,8 @@ export function DepositionDetail({ deposition }: Props) {
             label="Quality"
             value={
               d.quality_rating
-                ? "\u2605".repeat(d.quality_rating) +
-                  "\u2606".repeat(5 - d.quality_rating)
+                ? "★".repeat(d.quality_rating) +
+                  "☆".repeat(5 - d.quality_rating)
                 : null
             }
           />
@@ -36,20 +36,20 @@ export function DepositionDetail({ deposition }: Props) {
         </DetailSection>
 
         <DetailSection title="Laser Parameters">
-          <Field label="Fluence" value={d.laser_fluence} unit="J/cm\u00B2" />
+          <Field label="Fluence" value={d.laser_fluence} unit="J/cm²" />
           <Field label="Frequency" value={d.laser_frequency} unit="Hz" />
           <Field label="Energy" value={d.laser_energy_mj} unit="mJ" />
         </DetailSection>
 
         <DetailSection title="Growth Conditions">
-          <Field label="O\u2082 Pressure" value={d.oxygen_pressure} unit="mTorr" />
-          <Field label="Substrate Temperature" value={d.substrate_temperature} unit="\u00B0C" />
+          <Field label="O₂ Pressure" value={d.oxygen_pressure} unit="mTorr" />
+          <Field label="Substrate Temperature" value={d.substrate_temperature} unit="°C" />
           <Field label="Deposition Time" value={d.deposition_time_min} unit="min" />
         </DetailSection>
 
         <DetailSection title="Heating & Cooling">
           <Field label="Heater Current" value={d.heater_current_a} unit="A" />
-          <Field label="Cooling Rate" value={d.cooling_rate_c_per_min} unit="\u00B0C/min" />
+          <Field label="Cooling Rate" value={d.cooling_rate_c_per_min} unit="°C/min" />
           <Field label="Post-Dep Pressure" value={d.post_deposition_pressure_torr} unit="Torr" />
         </DetailSection>
 
@@ -67,7 +67,7 @@ export function DepositionDetail({ deposition }: Props) {
           <Field label="X" value={d.x_position} unit="mm" />
           <Field label="Y" value={d.y_position} unit="mm" />
           <Field label="Radial Distance" value={d.radial_distance} unit="mm" />
-          <Field label="Angle" value={d.angle} unit="\u00B0" />
+          <Field label="Angle" value={d.angle} unit="°" />
         </DetailSection>
 
         {d.notes && (

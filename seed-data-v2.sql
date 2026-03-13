@@ -18,7 +18,7 @@ WITH dep_aorl44 AS (
     run_id, laser_energy_mj, deposition_time_min, heater_current_a,
     post_deposition_pressure_torr, cooling_rate_c_per_min
   ) VALUES (
-    '2026-02-26', 'Aadit', 'SQZ LBFO / DSO', 'La-doped BiFeO3', 'DSO',
+    '2026-02-26', 'Ashish', 'SQZ LBFO / DSO', 'La-doped BiFeO3', 'DSO',
     '(110)', '5x5 mm', 2.0, 4,
     145, 713, 'BFO',
     12, 55, 4800,
@@ -44,7 +44,7 @@ WITH dep_aorl45 AS (
     run_id, laser_energy_mj, deposition_time_min, heater_current_a,
     post_deposition_pressure_torr, cooling_rate_c_per_min
   ) VALUES (
-    '2026-02-28', 'Aadit', 'LBFO / DSO', 'La-doped BiFeO3', 'DSO',
+    '2026-02-28', 'Ashish', 'LBFO / DSO', 'La-doped BiFeO3', 'DSO',
     '(110)', '5x5 mm', 2.0, 4,
     145, 713, 'BFO',
     12, 55, 4800,
@@ -70,7 +70,7 @@ WITH dep_aorl46 AS (
     run_id, laser_energy_mj, deposition_time_min, heater_current_a,
     post_deposition_pressure_torr, cooling_rate_c_per_min
   ) VALUES (
-    '2026-02-28', 'Aadit', 'LBRO / DSO', NULL, 'DSO',
+    '2026-02-28', 'Ashish', 'LBRO / DSO', NULL, 'DSO',
     '(110)', '5x5 mm', NULL, NULL,
     NULL, NULL, NULL,
     NULL, NULL, NULL,
@@ -96,7 +96,7 @@ WITH dep_aorl47 AS (
     run_id, laser_energy_mj, deposition_time_min, heater_current_a,
     post_deposition_pressure_torr, cooling_rate_c_per_min
   ) VALUES (
-    '2026-03-01', 'Aadit', 'LBFO / DSO', 'La-doped BiFeO3', 'DSO',
+    '2026-03-01', 'Ashish', 'LBFO / DSO', 'La-doped BiFeO3', 'DSO',
     '(110)', '5x5 mm', 2.0, 4,
     145, 703, 'BFO',
     12, 55, 4800,
@@ -122,7 +122,7 @@ WITH dep_aorl48 AS (
     run_id, laser_energy_mj, deposition_time_min, heater_current_a,
     post_deposition_pressure_torr, cooling_rate_c_per_min
   ) VALUES (
-    '2026-03-01', 'Aadit', 'LBFO / DSO', 'La-doped BiFeO3', 'DSO',
+    '2026-03-01', 'Ashish', 'LBFO / DSO', 'La-doped BiFeO3', 'DSO',
     '(110)', '5x5 mm', 2.0, 10,
     145, 703, 'BFO',
     12, 55, 4800,
@@ -148,7 +148,7 @@ WITH dep_aorl49 AS (
     run_id, laser_energy_mj, deposition_time_min, heater_current_a,
     post_deposition_pressure_torr, cooling_rate_c_per_min
   ) VALUES (
-    '2026-03-02', 'Aadit', 'LBFO / DSO', 'La-doped BiFeO3', 'DSO',
+    '2026-03-02', 'Ashish', 'LBFO / DSO', 'La-doped BiFeO3', 'DSO',
     '(110)', '5x5 mm', 2.0, 4,
     145, 693, 'BFO',
     12, 55, 4800,
@@ -161,7 +161,7 @@ WITH dep_aorl49 AS (
 SELECT id FROM dep_aorl49;
 
 -- ============================================================
--- AORL50: STO / STO / Si, 930C
+-- AORL50: STO / STO / Si, temp uncertain (raw 930)
 -- ============================================================
 WITH dep_aorl50 AS (
   INSERT INTO depositions (
@@ -174,12 +174,12 @@ WITH dep_aorl50 AS (
     run_id, laser_energy_mj, deposition_time_min, heater_current_a,
     post_deposition_pressure_torr, cooling_rate_c_per_min
   ) VALUES (
-    '2026-03-02', 'Aadit', 'STO / STO / Si', 'SrTiO3', 'STO / Si',
+    '2026-03-02', 'Ashish', 'STO / STO / Si', 'SrTiO3', 'STO / Si',
     '(001)', '10x10 mm', 1.5, 5,
-    110, 930, 'STO',
+    110, NULL, 'STO',
     12, 55, 1200,
     0.0, 0.5, 0.50, 90.0,
-    'Notebook may also show ''(700)'' in parentheses; preserve uncertainty in notes.', NULL,
+    'Raw readout shows 930; real machine temp uncertain. Notebook may also show ''(700)'' in parentheses.', NULL,
     'AORL50', 110, 4, 14,
     300, 30
   ) RETURNING id
@@ -187,7 +187,7 @@ WITH dep_aorl50 AS (
 SELECT id FROM dep_aorl50;
 
 -- ============================================================
--- AORL51: STO / STO / Si, 933C, bad
+-- AORL51: STO / STO / Si, temp uncertain (raw 933), bad
 -- ============================================================
 WITH dep_aorl51 AS (
   INSERT INTO depositions (
@@ -200,12 +200,12 @@ WITH dep_aorl51 AS (
     run_id, laser_energy_mj, deposition_time_min, heater_current_a,
     post_deposition_pressure_torr, cooling_rate_c_per_min
   ) VALUES (
-    '2026-03-03', 'Aadit', 'STO / STO / Si', 'SrTiO3', 'STO / Si',
+    '2026-03-03', 'Ashish', 'STO / STO / Si', 'SrTiO3', 'STO / Si',
     '(001)', '10x10 mm', 1.5, 5,
-    110, 933, 'STO',
+    110, NULL, 'STO',
     12, 55, 1200,
     -0.8, 1.6, 1.79, 116.6,
-    'Notebook says ''bad'' and ''leakage was high (136?)''. Also may show ''(710C)'' in parentheses.', 2,
+    'Raw readout shows 933; real machine temp uncertain. Notebook says ''bad'' and ''leakage was high (136?)''. Also may show ''(710C)'' in parentheses.', 2,
     'AORL51', 110, 4, 14,
     300, 30
   ) RETURNING id
@@ -213,7 +213,7 @@ WITH dep_aorl51 AS (
 SELECT id FROM dep_aorl51;
 
 -- ============================================================
--- AORL52: STO / STO / Si, 910C
+-- AORL52: STO / STO / Si, temp uncertain (raw 910)
 -- ============================================================
 WITH dep_aorl52 AS (
   INSERT INTO depositions (
@@ -226,12 +226,12 @@ WITH dep_aorl52 AS (
     run_id, laser_energy_mj, deposition_time_min, heater_current_a,
     post_deposition_pressure_torr, cooling_rate_c_per_min
   ) VALUES (
-    '2026-03-03', 'Aadit', 'STO / STO / Si', 'SrTiO3', 'STO / Si',
+    '2026-03-03', 'Ashish', 'STO / STO / Si', 'SrTiO3', 'STO / Si',
     '(001)', '10x10 mm', 1.5, 4,
-    110, 910, 'STO',
+    110, NULL, 'STO',
     12, 55, 960,
     0.6, -1.0, 1.17, -59.0,
-    '', NULL,
+    'Raw readout shows 910; real machine temp uncertain.', NULL,
     'AORL52', 110, 4, 14,
     NULL, NULL
   ) RETURNING id
@@ -252,7 +252,7 @@ WITH dep_aorl53 AS (
     run_id, laser_energy_mj, deposition_time_min, heater_current_a,
     post_deposition_pressure_torr, cooling_rate_c_per_min
   ) VALUES (
-    '2026-03-04', 'Aadit', '27% LBFO / DSO', '27% La-doped BiFeO3', 'DSO',
+    '2026-03-04', 'Ashish', '27% LBFO / DSO', '27% La-doped BiFeO3', 'DSO',
     '(110)', '5x5 mm', 2.0, 4,
     145, NULL, 'BFO',
     12, 55, 4800,
@@ -265,7 +265,7 @@ WITH dep_aorl53 AS (
 SELECT id FROM dep_aorl53;
 
 -- ============================================================
--- AORL54: S?O / STO / Si, 925C, illegible material
+-- AORL54: S?O / STO / Si, temp uncertain (raw 925), illegible material
 -- ============================================================
 WITH dep_aorl54 AS (
   INSERT INTO depositions (
@@ -278,12 +278,12 @@ WITH dep_aorl54 AS (
     run_id, laser_energy_mj, deposition_time_min, heater_current_a,
     post_deposition_pressure_torr, cooling_rate_c_per_min
   ) VALUES (
-    '2026-03-04', 'Aadit', 'S?O / STO / Si', 'S?O', 'STO / Si',
+    '2026-03-04', 'Ashish', 'S?O / STO / Si', 'S?O', 'STO / Si',
     '(001)', '10x10 mm', 1.5, 4,
-    110, 925, 'STO',
+    110, NULL, 'STO',
     12, 55, 1200,
     -1.5, -1.3, 1.98, -139.1,
-    'Material label is hard to read; preserved as ''S?O''. Post deposition line appears to read ''PD: 25C/min, 300 Torr''.', NULL,
+    'Raw readout shows 925; real machine temp uncertain. Material label is hard to read; preserved as ''S?O''. Post deposition line appears to read ''PD: 25C/min, 300 Torr''.', NULL,
     'AORL54', 110, 5, 14,
     300, 25
   ) RETURNING id
@@ -291,7 +291,7 @@ WITH dep_aorl54 AS (
 SELECT id FROM dep_aorl54;
 
 -- ============================================================
--- AORL55: 5% LBFO / DSO, 938C
+-- AORL55: 5% LBFO / DSO, temp uncertain (raw 938)
 -- ============================================================
 WITH dep_aorl55 AS (
   INSERT INTO depositions (
@@ -304,12 +304,12 @@ WITH dep_aorl55 AS (
     run_id, laser_energy_mj, deposition_time_min, heater_current_a,
     post_deposition_pressure_torr, cooling_rate_c_per_min
   ) VALUES (
-    '2026-03-04', 'Aadit', '5% LBFO / DSO', '5% La-doped BiFeO3', 'DSO',
+    '2026-03-04', 'Ashish', '5% LBFO / DSO', '5% La-doped BiFeO3', 'DSO',
     '(110)', '5x5 mm', 2.0, 4,
-    145, 938, 'BFO',
+    145, NULL, 'BFO',
     12, 55, 4800,
     0.2, 0.1, 0.22, 26.6,
-    '', NULL,
+    'Raw readout shows 938; real machine temp uncertain.', NULL,
     'AORL55', 150, 20, 14,
     300, 30
   ) RETURNING id
@@ -317,7 +317,7 @@ WITH dep_aorl55 AS (
 SELECT id FROM dep_aorl55;
 
 -- ============================================================
--- AORL56: 5% LBFO / DSO, 948C
+-- AORL56: 5% LBFO / DSO, temp uncertain (raw 948)
 -- ============================================================
 WITH dep_aorl56 AS (
   INSERT INTO depositions (
@@ -330,12 +330,12 @@ WITH dep_aorl56 AS (
     run_id, laser_energy_mj, deposition_time_min, heater_current_a,
     post_deposition_pressure_torr, cooling_rate_c_per_min
   ) VALUES (
-    '2026-03-05', 'Aadit', '5% LBFO / DSO', '5% La-doped BiFeO3', 'DSO',
+    '2026-03-05', 'Ashish', '5% LBFO / DSO', '5% La-doped BiFeO3', 'DSO',
     '(110)', '5x5 mm', 2.0, 4,
-    145, 948, 'BFO',
+    145, NULL, 'BFO',
     12, 55, 4800,
     -0.3, 1.8, 1.82, 99.5,
-    '', NULL,
+    'Raw readout shows 948; real machine temp uncertain.', NULL,
     'AORL56', 140, 20, 14,
     300, 30
   ) RETURNING id
@@ -343,7 +343,7 @@ WITH dep_aorl56 AS (
 SELECT id FROM dep_aorl56;
 
 -- ============================================================
--- AORL57: BFO / DSO, 938C
+-- AORL57: BFO / DSO, temp uncertain (raw 938)
 -- ============================================================
 WITH dep_aorl57 AS (
   INSERT INTO depositions (
@@ -356,12 +356,12 @@ WITH dep_aorl57 AS (
     run_id, laser_energy_mj, deposition_time_min, heater_current_a,
     post_deposition_pressure_torr, cooling_rate_c_per_min
   ) VALUES (
-    '2026-03-05', 'Aadit', 'BFO / DSO', 'BiFeO3', 'DSO',
+    '2026-03-05', 'Ashish', 'BFO / DSO', 'BiFeO3', 'DSO',
     '(110)', '5x5 mm', 2.0, 4,
-    145, 938, 'BFO',
+    145, NULL, 'BFO',
     12, 55, 4800,
     1.6, -0.9, 1.84, -29.4,
-    'Material line reads like ''BFO/DSO''. Handwriting is somewhat ambiguous.', NULL,
+    'Raw readout shows 938; real machine temp uncertain. Material line reads like ''BFO/DSO''. Handwriting is somewhat ambiguous.', NULL,
     'AORL57', 140, 20, 14,
     NULL, NULL
   ) RETURNING id
@@ -369,7 +369,7 @@ WITH dep_aorl57 AS (
 SELECT id FROM dep_aorl57;
 
 -- ============================================================
--- AORL58: LBFO / DSO, 931C
+-- AORL58: LBFO / DSO, temp uncertain (raw 931)
 -- ============================================================
 WITH dep_aorl58 AS (
   INSERT INTO depositions (
@@ -382,12 +382,12 @@ WITH dep_aorl58 AS (
     run_id, laser_energy_mj, deposition_time_min, heater_current_a,
     post_deposition_pressure_torr, cooling_rate_c_per_min
   ) VALUES (
-    '2026-03-06', 'Aadit', 'LBFO / DSO', 'La-doped BiFeO3', 'DSO',
+    '2026-03-06', 'Ashish', 'LBFO / DSO', 'La-doped BiFeO3', 'DSO',
     '(110)', '5x5 mm', 2.0, 4,
-    145, 931, 'BFO',
+    145, NULL, 'BFO',
     12, 55, 4800,
     -0.1, -1.9, 1.90, -93.0,
-    'Notebook also shows something like ''(9?-22?)'' near the run ID; unclear.', NULL,
+    'Raw readout shows 931; real machine temp uncertain. Notebook also shows something like ''(9?-22?)'' near the run ID; unclear.', NULL,
     'AORL58', 140, 20, 14,
     NULL, NULL
   ) RETURNING id
@@ -405,7 +405,7 @@ WITH target_dep AS (
 ),
 ana_afm AS (
   INSERT INTO analyses (deposition_id, analysis_type, operator_name, notes)
-  VALUES ((SELECT id FROM target_dep), 'AFM', 'Aadit', '5um scan, smooth terraces visible')
+  VALUES ((SELECT id FROM target_dep), 'AFM', 'Ashish', '5um scan, smooth terraces visible')
   RETURNING id
 )
 INSERT INTO analysis_images (analysis_id, image_url, caption, scan_size_value, scan_size_unit, image_order)
@@ -419,7 +419,7 @@ WITH target_dep AS (
 ),
 ana_pfm AS (
   INSERT INTO analyses (deposition_id, analysis_type, operator_name, notes)
-  VALUES ((SELECT id FROM target_dep), 'PFM', 'Aadit', 'Piezoresponse force microscopy, clear domain structure')
+  VALUES ((SELECT id FROM target_dep), 'PFM', 'Ashish', 'Piezoresponse force microscopy, clear domain structure')
   RETURNING id
 )
 INSERT INTO analysis_images (analysis_id, image_url, caption, scan_size_value, scan_size_unit, image_order)
@@ -433,12 +433,12 @@ WITH target_dep AS (
 ),
 ana_xrd AS (
   INSERT INTO analyses (deposition_id, analysis_type, operator_name, notes)
-  VALUES ((SELECT id FROM target_dep), 'XRD', 'Aadit', 'Theta-2theta scan, good (001) peak')
+  VALUES ((SELECT id FROM target_dep), 'XRD', 'Ashish', 'Theta-2theta scan, good (001) peak')
   RETURNING id
 ),
 ana_afm AS (
   INSERT INTO analyses (deposition_id, analysis_type, operator_name, notes)
-  VALUES ((SELECT id FROM target_dep), 'AFM', 'Aadit', '10um scan overview')
+  VALUES ((SELECT id FROM target_dep), 'AFM', 'Ashish', '10um scan overview')
   RETURNING id
 )
 INSERT INTO analysis_images (analysis_id, image_url, caption, scan_size_value, scan_size_unit, image_order)

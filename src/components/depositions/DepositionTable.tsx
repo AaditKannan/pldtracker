@@ -60,7 +60,7 @@ export function DepositionTable({ depositions }: Props) {
     >
       {label}
       {sortField === field && (
-        <span className="ml-1">{sortDir === "asc" ? "\u25B2" : "\u25BC"}</span>
+        <span className="ml-1">{sortDir === "asc" ? "▲" : "▼"}</span>
       )}
     </th>
   );
@@ -91,9 +91,9 @@ export function DepositionTable({ depositions }: Props) {
                 <th className="px-3 py-2 text-left text-[10px] font-medium text-[var(--text-muted)] uppercase tracking-wider">
                   Substrate
                 </th>
-                <SortHeader field="substrate_temperature" label="Temp (\u00B0C)" />
+                <SortHeader field="substrate_temperature" label="Temp (°C)" />
                 <th className="px-3 py-2 text-left text-[10px] font-medium text-[var(--text-muted)] uppercase tracking-wider">
-                  O\u2082 (mTorr)
+                  O₂ (mTorr)
                 </th>
                 <SortHeader field="quality_rating" label="Quality" />
                 <SortHeader field="analysis_count" label="Analyses" />
@@ -117,25 +117,25 @@ export function DepositionTable({ depositions }: Props) {
                     </Link>
                   </td>
                   <td className="px-3 py-2.5 text-sm font-medium text-[var(--text-primary)]">
-                    {dep.material_system ?? "\u2014"}
+                    {dep.material_system ?? "—"}
                   </td>
                   <td className="px-3 py-2.5 text-sm text-[var(--text-secondary)]">
                     {dep.researcher}
                   </td>
                   <td className="px-3 py-2.5 text-sm text-[var(--text-secondary)]">
-                    {dep.substrate_type ?? "\u2014"}
+                    {dep.substrate_type ?? "—"}
                   </td>
                   <td className="px-3 py-2.5 text-sm text-[var(--text-secondary)] tabular-nums">
-                    {dep.substrate_temperature ?? "\u2014"}
+                    {dep.substrate_temperature ?? "—"}
                   </td>
                   <td className="px-3 py-2.5 text-sm text-[var(--text-secondary)] tabular-nums">
-                    {dep.oxygen_pressure ?? "\u2014"}
+                    {dep.oxygen_pressure ?? "—"}
                   </td>
                   <td className="px-3 py-2.5 text-sm text-amber-400">
                     {dep.quality_rating != null
-                      ? "\u2605".repeat(dep.quality_rating) +
-                        "\u2606".repeat(5 - dep.quality_rating)
-                      : "\u2014"}
+                      ? "★".repeat(dep.quality_rating) +
+                        "☆".repeat(5 - dep.quality_rating)
+                      : "—"}
                   </td>
                   <td className="px-3 py-2.5 text-sm text-[var(--text-secondary)] tabular-nums">
                     {dep.analysis_count}

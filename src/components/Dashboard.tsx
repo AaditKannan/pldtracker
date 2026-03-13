@@ -18,7 +18,7 @@ function StatsBar({ depositions }: { depositions: DepositionWithAnalyses[] }) {
   const avgQuality =
     rated.length > 0
       ? (rated.reduce((s, d) => s + d.quality_rating!, 0) / rated.length).toFixed(1)
-      : "\u2014";
+      : "—";
 
   const materialCounts: Record<string, number> = {};
   depositions.forEach((d) => {
@@ -26,7 +26,7 @@ function StatsBar({ depositions }: { depositions: DepositionWithAnalyses[] }) {
     materialCounts[m] = (materialCounts[m] || 0) + 1;
   });
   const topMaterial =
-    Object.entries(materialCounts).sort((a, b) => b[1] - a[1])[0]?.[0] ?? "\u2014";
+    Object.entries(materialCounts).sort((a, b) => b[1] - a[1])[0]?.[0] ?? "—";
 
   return (
     <div className="flex items-center gap-6 px-4 py-2 bg-[var(--bg-elevated)] rounded-lg text-xs mb-4">
@@ -81,7 +81,7 @@ export function Dashboard({ depositions }: Props) {
       </aside>
 
       {/* Main content */}
-      <main className="flex-1 flex items-center justify-center p-8 overflow-auto">
+      <main className="flex-1 flex items-start justify-center pt-6 px-8 pb-8 overflow-auto">
         <div className="w-full max-w-[700px]">
           <StatsBar depositions={filtered} />
           <DiskVisualization

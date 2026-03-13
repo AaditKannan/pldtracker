@@ -127,14 +127,14 @@ export function AnalysisListView({ analyses }: Props) {
                       href={`/depositions/${a.deposition_id}`}
                       className="text-[var(--accent-primary)] hover:text-[var(--accent-primary-hover)]"
                     >
-                      {a.depositions?.material_system ?? "\u2014"}{" "}
+                      {a.depositions?.material_system ?? "—"}{" "}
                       <span className="text-[var(--text-muted)]">
                         {a.depositions?.date}
                       </span>
                     </Link>
                   </td>
                   <td className="px-3 py-2.5 text-sm text-[var(--text-secondary)]">
-                    {a.operator_name ?? "\u2014"}
+                    {a.operator_name ?? "—"}
                   </td>
                   <td className="px-3 py-2.5 text-xs text-[var(--text-muted)] font-mono">
                     {a.analysis_metrics
@@ -148,7 +148,7 @@ export function AnalysisListView({ analyses }: Props) {
                   <td className="px-3 py-2.5 text-xs text-[var(--text-muted)]">
                     {a.uploaded_at
                       ? new Date(a.uploaded_at).toLocaleDateString()
-                      : "\u2014"}
+                      : "—"}
                   </td>
                 </tr>
               ))}

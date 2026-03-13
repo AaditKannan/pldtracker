@@ -30,7 +30,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased font-sans bg-[var(--bg-base)] text-[var(--text-primary)]`}
       >
         <NavBar />
-        <div className="h-[calc(100vh-3.5rem)]">{children}</div>
+        <div className="h-[calc(100vh-3rem)]">{children}</div>
         <Toaster
           position="bottom-right"
           toastOptions={{

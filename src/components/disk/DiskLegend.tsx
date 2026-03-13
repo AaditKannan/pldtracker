@@ -50,7 +50,7 @@ export function DiskLegend({ colorMode }: Props) {
   if (colorMode === "temperature") {
     return (
       <LegendWrapper title={title}>
-        <GradientBar from="#3b82f6" to="#ef4444" leftLabel="200\u00B0C" rightLabel="900\u00B0C" />
+        <GradientBar from="#3b82f6" to="#ef4444" leftLabel="200°C" rightLabel="900°C" />
       </LegendWrapper>
     );
   }

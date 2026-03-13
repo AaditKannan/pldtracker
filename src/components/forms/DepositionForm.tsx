@@ -304,7 +304,7 @@ export function DepositionForm() {
         <div className="grid grid-cols-2 gap-4">
           <RangeInput
             label="Fluence"
-            unit="J/cm\u00B2"
+            unit="J/cm²"
             id="laser_fluence"
             min={0.5}
             max={5.0}
@@ -335,7 +335,7 @@ export function DepositionForm() {
       <Section title="Growth Conditions">
         <div className="grid grid-cols-2 gap-4">
           <RangeInput
-            label="O\u2082 Pressure"
+            label="O₂ Pressure"
             unit="mTorr"
             id="oxygen_pressure"
             min={0}
@@ -346,7 +346,7 @@ export function DepositionForm() {
           />
           <RangeInput
             label="Substrate Temperature"
-            unit="\u00B0C"
+            unit="°C"
             id="substrate_temperature"
             min={200}
             max={950}
@@ -406,7 +406,7 @@ export function DepositionForm() {
             onChange={(e) => set("heater_current_a", e.target.value)}
           />
           <Input
-            label="Cooling Rate (\u00B0C/min)"
+            label="Cooling Rate (°C/min)"
             id="cooling_rate_c_per_min"
             type="number"
             step="1"
@@ -475,7 +475,7 @@ export function DepositionForm() {
               onChange={(e) => updateFromPolar(e.target.value, form.angle)}
             />
             <Input
-              label="Angle (\u00B0)"
+              label="Angle (°)"
               id="angle"
               type="number"
               step="0.1"
