@@ -71,7 +71,7 @@ export function Histogram({ data, field, label }: Props) {
         data={bins}
         margin={{ top: 10, right: 30, bottom: 30, left: 20 }}
       >
-        <CartesianGrid strokeDasharray="3 3" stroke="#e0dfdc" />
+        <CartesianGrid strokeDasharray="3 3" stroke="#d0cfcc" />
         <XAxis
           dataKey="range"
           label={{
@@ -86,7 +86,7 @@ export function Histogram({ data, field, label }: Props) {
           angle={-45}
           textAnchor="end"
           height={60}
-          stroke="#cccbc8"
+          stroke="#b5b4b1"
         />
         <YAxis
           label={{
@@ -99,7 +99,7 @@ export function Histogram({ data, field, label }: Props) {
           }}
           tick={{ fontSize: 11, fill: "#999999" }}
           allowDecimals={false}
-          stroke="#cccbc8"
+          stroke="#b5b4b1"
         />
         <Tooltip
           content={({ payload }) => {

@@ -52,14 +52,14 @@ export function ScatterPlot({
   return (
     <ResponsiveContainer width="100%" height={400}>
       <ScatterChart margin={{ top: 10, right: 30, bottom: 30, left: 20 }}>
-        <CartesianGrid strokeDasharray="3 3" stroke="#e0dfdc" />
+        <CartesianGrid strokeDasharray="3 3" stroke="#d0cfcc" />
         <XAxis
           dataKey="x"
           type="number"
           name={xLabel}
           label={{ value: xLabel, position: "insideBottom", offset: -15, fontSize: 12, fill: "#555555" }}
           tick={{ fontSize: 11, fill: "#999999" }}
-          stroke="#cccbc8"
+          stroke="#b5b4b1"
         />
         <YAxis
           dataKey="y"
@@ -67,7 +67,7 @@ export function ScatterPlot({
           name={yLabel}
           label={{ value: yLabel, angle: -90, position: "insideLeft", offset: 5, fontSize: 12, fill: "#555555" }}
           tick={{ fontSize: 11, fill: "#999999" }}
-          stroke="#cccbc8"
+          stroke="#b5b4b1"
         />
         <Tooltip
           content={({ payload }) => {

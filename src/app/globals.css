@@ -37,8 +37,8 @@
   --bg-hover: #eeedea;
 
   /* Borders */
-  --border-subtle: #e0dfdc;
-  --border-default: #cccbc8;
+  --border-subtle: #d0cfcc;
+  --border-default: #b5b4b1;
 
   /* Text */
   --text-primary: #1a1a1a;
@@ -70,6 +70,9 @@
 body {
   background: var(--bg-base);
   color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 450;
 }
 
 /* Scrollbar styling */
